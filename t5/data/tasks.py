@@ -110,7 +110,7 @@ TaskRegistry.add(
             }),
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
-        preprocessors.ul2,
+        preprocessors.ul2_objective,
         seqio.preprocessors.append_eos_after_trim,
 
     ],
