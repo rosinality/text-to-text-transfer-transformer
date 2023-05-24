@@ -44,7 +44,7 @@ DEFAULT_OUTPUT_FEATURES = {
 # Final pretraining task used in Raffel et al., 2019.
 TaskRegistry.add(
     "c4_v220_span_corruption",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:2.2.0"),
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
@@ -64,7 +64,7 @@ TaskRegistry.add(
 # Baseline pretraining task used in Raffel et al., 2019.
 TaskRegistry.add(
     "c4_v220_iid_denoising",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:2.2.0"),
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
@@ -83,7 +83,7 @@ TaskRegistry.add(
 # Prefix language modeling pretraining task used in Raffel et al., 2019.
 TaskRegistry.add(
     "c4_v220_prefix_lm",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:2.2.0"),
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
@@ -98,13 +98,32 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[])
 
+# UL2
+TaskRegistry.add(
+    "c4_v220_ul2",
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
 
 # Configurable tasks used for comparisons in Raffel et al., 2019.
 _c4_config_suffixes = ["", ".noclean", ".realnewslike", ".webtextlike"]
 for config_suffix in _c4_config_suffixes:
   TaskRegistry.add(
       "c4{name}_v020_unsupervised".format(name=config_suffix.replace(".", "_")),
-      source=seqio.TfdsDataSource(tfds_name="c4/en{config}:2.2.0".format(
+      source=seqio.TfdsDataSource(tfds_name="c4/en{config}:3.0.1".format(
           config=config_suffix)),
       preprocessors=[
           functools.partial(
@@ -413,7 +432,7 @@ vocab = seqio.SentencePieceVocabulary(sentencepiece_model_file)
 
 seqio.TaskRegistry.add(
     "c4_prefix_lm_objective_encoder_decoder_architecture",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:2.2.0"),
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
@@ -444,7 +463,7 @@ seqio.TaskRegistry.add(
 
 seqio.TaskRegistry.add(
     "c4_prefix_lm_objective_decoder_architecture",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:2.2.0"),
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
@@ -472,7 +491,7 @@ seqio.TaskRegistry.add(
 
 TaskRegistry.add(
     "c4_v220_full_lm",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:2.2.0"),
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
