@@ -98,6 +98,24 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[])
 
+# Full language modeling pretraining task used in Raffel et al., 2019.
+TaskRegistry.add(
+    "c4_v220_full_lm",
+    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
 # UL2
 TaskRegistry.add(
     "c4_v220_ul2",
