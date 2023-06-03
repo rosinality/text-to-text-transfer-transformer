@@ -92,8 +92,8 @@ MixtureRegistry.add(
 MixtureRegistry.add(
     "mix_ul2",
     [
-        ("c4_v220_ul2", 100.),
-        ("wikipedia_ul2", 10.0),
+        ("c4_v220_ul2", 15.),
+        ("wikipedia_ul2", 4.5),
         ("my_dataset_ul2", 0.1),
     ],
     default_rate=1.,
