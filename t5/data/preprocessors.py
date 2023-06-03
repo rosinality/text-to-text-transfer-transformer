@@ -2232,7 +2232,7 @@ def ul2_objective(
   mean_noise_span_lengths: Sequence[float] = (3.0, 8.0, 3.0, 8.0, 64.0,), 
   noise_densities: Sequence[float] = (0.15, 0.15, 0.5, 0.5, 0.5,), 
   shard_ds: bool = True, 
-  optional_task_prefixes: Optional[Sequence[str]] = ["[NLU] ", "[NLU] ", "[NLG] ", "[NLG] ", "[NLG] ", "[NLG] ", "[NLG] ", "[NLG] ", "[S2S] "], 
+  optional_task_prefixes: Optional[Sequence[str]] = ["[NLU] ", "[NLU] ", "[NLG] ", "[NLG] ", "[NLG] ", "[S2S] "], 
   input_feature_key: str = "inputs", 
   merge_examples_to_reduce_padding: bool = True, 
   reserved_for_packing: bool = None, 
