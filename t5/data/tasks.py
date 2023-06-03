@@ -29,7 +29,7 @@ from t5.evaluation import metrics
 import tensorflow_datasets as tfds
 
 TaskRegistry = seqio.TaskRegistry
-
+NUM_VAL_EXAMPLES = 2000
 
 DEFAULT_OUTPUT_FEATURES = {
     "inputs": seqio.Feature(
@@ -118,7 +118,13 @@ TaskRegistry.add(
 # UL2
 TaskRegistry.add(
     "c4_v220_ul2",
-    source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
+    source=seqio.TfdsDataSource(
+        tfds_name="c4/en:3.0.1",
+        splits={
+            'train': 'train',
+            'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
+        },
+    ),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
@@ -141,9 +147,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="my_dataset:1.0.0",
         splits={
-            'train': f'train[:-1%]',
-            'validation': f'train[-1%:]',
-        }
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
     ),
     preprocessors=[
         functools.partial(
@@ -159,6 +165,8 @@ TaskRegistry.add(
     ],
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[])
+
+
 
 # Configurable tasks used for comparisons in Raffel et al., 2019.
 _c4_config_suffixes = ["", ".noclean", ".realnewslike", ".webtextlike"]
