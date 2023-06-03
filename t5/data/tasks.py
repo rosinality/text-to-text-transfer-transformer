@@ -139,7 +139,7 @@ TaskRegistry.add(
 # My dataset UL2
 TaskRegistry.add(
     "my_dataset_ul2",
-    source=seqio.TfdsDataSource(tfds_name="my_dataset/1.0.0"),
+    source=seqio.TfdsDataSource(tfds_name="my_dataset:1.0.0"),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={
