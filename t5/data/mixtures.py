@@ -88,6 +88,18 @@ MixtureRegistry.add(
     [t for t in _glue_tasks if "mnli" in t],
     default_rate=1.0)
 
+# ============================== Mix pre-training ===================================
+MixtureRegistry.add(
+    "mix_ul2",
+    [
+        ("c4_v220_ul2", 100.),
+        ("my_dataset_ul2", 1.),
+    ],
+    default_rate=1.,
+)
+
+
+
 # ============================== Co-training ===================================
 
 
@@ -114,6 +126,8 @@ MixtureRegistry.add(
     _supervised_tasks + ["c4_v020_unsupervised"],
     default_rate=1.,
 )
+
+
 
 
 def _dedupe(name):
