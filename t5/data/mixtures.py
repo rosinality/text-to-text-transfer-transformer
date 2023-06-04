@@ -99,6 +99,15 @@ MixtureRegistry.add(
     default_rate=1.,
 )
 
+MixtureRegistry.add(
+    "mix_ul2_noprefix",
+    [
+        ("c4_v220_ul2_noprefix", 15.),
+        ("wikipedia_ul2_noprefix", 4.5),
+        ("my_dataset_ul2_noprefix", 0.1),
+    ],
+    default_rate=1.,
+)
 
 
 # ============================== Co-training ===================================
