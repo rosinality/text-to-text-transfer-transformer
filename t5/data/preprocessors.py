@@ -2320,6 +2320,104 @@ def ul2_objective(
     ds = tf.data.experimental.sample_from_datasets(processed_ds, rates, seed) 
     return ds
 
+  
+def ul2_objective_noprefix(
+  dataset: tf.data.Dataset, 
+  sequence_length: seqio.preprocessors.SequenceLengthType, 
+  output_features: seqio.preprocessors.OutputFeaturesType, 
+  use_prefix_lm_task: bool = True, 
+  rates: Sequence[float] = (0.1, 0.1, 0.1, 0.1, 0.1, 0.5,),
+  mean_noise_span_lengths: Sequence[float] = (3.0, 8.0, 3.0, 8.0, 64.0,), 
+  noise_densities: Sequence[float] = (0.15, 0.15, 0.5, 0.5, 0.5,), 
+  shard_ds: bool = True, 
+  optional_task_prefixes: Optional[Sequence[str]] = None, 
+  input_feature_key: str = "inputs", 
+  merge_examples_to_reduce_padding: bool = True, 
+  reserved_for_packing: bool = None, 
+  seed: int = 7)-> tf.data.Dataset:
+  if optional_task_prefixes: # Ensure each task has a prefix. 
+    num_tasks = len(noise_densities) + int(use_prefix_lm_task) 
+    valid_number_of_prefixes = num_tasks == len(optional_task_prefixes) 
+    if not valid_number_of_prefixes: 
+      raise ValueError("Number of task prefixes must match number of tasks.")
+    inputs_length = sequence_length[input_feature_key] 
+    input_lengths, targets_lengths = [], [] 
+    sequence_lengths = {x: y for x, y in sequence_length.items()}
+    if reserved_for_packing: 
+      inputs_length-= reserved_for_packing 
+      for x, y in sequence_length.items(): 
+        sequence_lengths[x] = y- reserved_for_packing
+    hyperparams = list(zip(mean_noise_span_lengths, noise_densities)) 
+    for mean_noise_span_length, noise_density in hyperparams: 
+      input_length, targets_length = random_spans_helper( 
+        extra_tokens_per_span_inputs=1, 
+        extra_tokens_per_span_targets=1, 
+        inputs_length=inputs_length, 
+        mean_noise_span_length=mean_noise_span_length, 
+        noise_density=noise_density) 
+      input_lengths.append(input_length) 
+      targets_lengths.append(targets_length)
+
+      if sequence_length["targets"] < targets_length: 
+        upper_bound = max(targets_lengths) 
+        raise ValueError("Invalid sequence length.")
+
+    ds = dataset 
+    ds = select_random_chunk( 
+      ds, 
+      output_features=output_features, 
+      feature_key="targets", 
+      max_length=65536) 
+    if merge_examples_to_reduce_padding: 
+      ds = reduce_concat_tokens(
+        ds, 
+        feature_key="targets", 
+        batch_size=128) 
+      num_shards = len(input_lengths) + int(use_prefix_lm_task)
+    if shard_ds: 
+      ds_shards = [ds.shard(num_shards, i) for i in range(num_shards)] 
+    else: 
+      ds_shards = [ds for _ in range(num_shards)]
+
+    processed_ds = [] 
+    hyperparams = zip(input_lengths, hyperparams, range(num_shards))
+    for input_length, (noise_span_length, noise_density), i in hyperparams: 
+      ds = ds_shards[i] 
+      ds = split_tokens( 
+        ds, 
+        feature_key="targets", 
+        min_tokens_per_segment=None,
+        max_tokens_per_segment=input_length)
+      ds = denoise( 
+        ds, output_features, 
+        inputs_fn=noise_span_to_unique_sentinel, 
+        targets_fn=nonnoise_span_to_unique_sentinel, 
+        noise_density=noise_density, 
+        noise_mask_fn=functools.partial( 
+          random_spans_noise_mask, 
+          mean_noise_span_length=noise_span_length), 
+        input_feature_key=input_feature_key)
+      if optional_task_prefixes: 
+        ds = prepend_prompt( 
+          ds, 
+          output_features, 
+          prompt_mode=optional_task_prefixes[i], 
+          mode=optional_task_prefixes[i]) 
+      processed_ds.append(ds)
+    if use_prefix_lm_task: 
+      ds = ds_shards[-1] 
+      ds = prefix_lm(
+        ds, sequence_lengths, output_features) 
+      if optional_task_prefixes: 
+        ds = prepend_prompt( 
+          ds, 
+          output_features, 
+          prompt_mode=optional_task_prefixes[-1], 
+          mode=optional_task_prefixes[-1]) 
+      processed_ds.append(ds)
+    ds = tf.data.experimental.sample_from_datasets(processed_ds, rates, seed) 
+    return ds
+
 
 @gin.configurable
 def select_random_chunk(dataset: tf.data.Dataset,
