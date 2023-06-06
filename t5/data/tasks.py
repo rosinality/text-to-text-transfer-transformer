@@ -166,9 +166,9 @@ TaskRegistry.add(
 
 # My dataset UL2
 TaskRegistry.add(
-    "my_dataset_ul2",
+    "RedPajama_stackexchange_ul2",
     source=seqio.TfdsDataSource(
-        tfds_name="my_dataset:1.0.0",
+        tfds_name="RedPajama_stackexchange:1.0.0",
         splits={
             'train': f'train[:-{NUM_VAL_EXAMPLES}]',
             'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
@@ -190,9 +190,9 @@ TaskRegistry.add(
     metric_fns=[])
 
 TaskRegistry.add(
-    "my_dataset_ul2_noprefix",
+    "RedPajama_stackexchange_ul2_noprefix",
     source=seqio.TfdsDataSource(
-        tfds_name="my_dataset:1.0.0",
+        tfds_name="RedPajama_stackexchange:1.0.0",
         splits={
             'train': f'train[:-{NUM_VAL_EXAMPLES}]',
             'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
