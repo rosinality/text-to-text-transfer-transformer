@@ -94,7 +94,7 @@ MixtureRegistry.add(
     [
         ("c4_v220_ul2", 15.),
         ("wikipedia_ul2", 4.5),
-        ("my_dataset_ul2", 0.1),
+        ("RedPajama_stackexchange_ul2", 2.0),
     ],
     default_rate=1.,
 )
@@ -104,7 +104,7 @@ MixtureRegistry.add(
     [
         ("c4_v220_ul2_noprefix", 15.),
         ("wikipedia_ul2_noprefix", 4.5),
-        ("my_dataset_ul2_noprefix", 0.1),
+        ("RedPajama_stackexchange_ul2_noprefix", 2.0),
     ],
     default_rate=1.,
 )
