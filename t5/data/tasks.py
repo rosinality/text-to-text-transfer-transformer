@@ -164,7 +164,10 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[])
 
-# My dataset UL2
+
+
+
+# ========================OpenMoE Dataset=========================
 TaskRegistry.add(
     "redpajama_stackexchange_ul2",
     source=seqio.TfdsDataSource(
@@ -216,9 +219,9 @@ TaskRegistry.add(
 
 # wiki dataset UL2
 TaskRegistry.add(
-    "wikipedia_ul2",
+    "redpajama_wikipedia_ul2",
     source=seqio.TfdsDataSource(
-        tfds_name="wikipedia/20190301.en:1.0.0",
+        tfds_name="redpajama_wikipedia:1.0.0",
         splits={
             'train': f'train[:-{NUM_VAL_EXAMPLES}]',
             'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
@@ -240,9 +243,9 @@ TaskRegistry.add(
     metric_fns=[])
 
 TaskRegistry.add(
-    "wikipedia_ul2_noprefix",
+    "redpajama_wikipedia_ul2_noprefix",
     source=seqio.TfdsDataSource(
-        tfds_name="wikipedia/20190301.en:1.0.0",
+        tfds_name="redpajama_wikipedia:1.0.0",
         splits={
             'train': f'train[:-{NUM_VAL_EXAMPLES}]',
             'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
@@ -262,6 +265,261 @@ TaskRegistry.add(
     ],
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[])
+
+
+# C4 dataset UL2
+TaskRegistry.add(
+    "redpajama_c4_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_c4:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+TaskRegistry.add(
+    "redpajama_c4_ul2_noprefix",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_c4:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective_noprefix,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+# ArXiv dataset UL2
+TaskRegistry.add(
+    "redpajama_arxiv_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_arxiv:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+TaskRegistry.add(
+    "redpajama_arxiv_ul2_noprefix",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_arxiv:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective_noprefix,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+# Github dataset UL2
+TaskRegistry.add(
+    "redpajama_github_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_github:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+TaskRegistry.add(
+    "redpajama_github_ul2_noprefix",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_github:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective_noprefix,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+# Book dataset UL2
+TaskRegistry.add(
+    "redpajama_book_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_book:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+TaskRegistry.add(
+    "redpajama_book_ul2_noprefix",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_book:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective_noprefix,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+# Commoncrawl dataset UL2
+TaskRegistry.add(
+    "redpajama_common_crawl_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_common_crawl:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+TaskRegistry.add(
+    "redpajama_common_crawl_ul2_noprefix",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_common_crawl:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective_noprefix,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+
+
+
+
 
 # Configurable tasks used for comparisons in Raffel et al., 2019.
 _c4_config_suffixes = ["", ".noclean", ".realnewslike", ".webtextlike"]
