@@ -516,6 +516,54 @@ TaskRegistry.add(
     metric_fns=[])
 
 
+# The Stack dataset UL2
+TaskRegistry.add(
+    "the_stack_dedup_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="the_stack_dedup:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+TaskRegistry.add(
+    "the_stack_dedup_ul2_noprefix",
+    source=seqio.TfdsDataSource(
+        tfds_name="the_stack_dedup:1.0.0",
+        splits={
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective_noprefix,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
 
 
 
