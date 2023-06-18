@@ -107,9 +107,14 @@ MixtureRegistry.add(
 MixtureRegistry.add(
     "mix_ul2_noprefix",
     [
-        ("c4_v220_ul2_noprefix", 15.),
-        ("wikipedia_ul2_noprefix", 4.5),
-        ("redpajama_stackexchange_ul2_noprefix", 2.0),
+        ("redpajama_c4_ul2", 15.),
+        ("redpajama_wikipedia_ul2", 4.5),
+        ("redpajama_stackexchange_ul2", 2.0),
+        ("redpajama_arxiv_ul2", 2.5),
+        ("redpajama_book_ul2", 4.5),
+        ("redpajama_github_ul2", 4.5),
+        ("redpajama_common_crawl_ul2", 67.0),
+        ("the_stack_dedup_ul2", 100.),
     ],
     default_rate=1.,
 )
