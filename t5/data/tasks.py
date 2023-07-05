@@ -122,7 +122,7 @@ TaskRegistry.add(
         tfds_name="c4/en:3.0.1",
         splits={
             'train': 'train',
-            'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
         },
     ),
     preprocessors=[
@@ -146,7 +146,7 @@ TaskRegistry.add(
         tfds_name="c4/en:3.0.1",
         splits={
             'train': 'train',
-            'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
         },
     ),
     preprocessors=[
@@ -173,8 +173,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_stackexchange:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -197,8 +198,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_stackexchange:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -223,8 +225,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_wikipedia:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -247,8 +250,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_wikipedia:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -273,8 +277,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_c4:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -297,8 +302,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_c4:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -322,8 +328,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_arxiv:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -346,8 +353,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_arxiv:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -372,8 +380,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_github:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -396,8 +405,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_github:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -422,8 +432,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_book:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -446,8 +457,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_book:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -472,8 +484,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_common_crawl:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -496,8 +509,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_common_crawl:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -522,8 +536,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="the_stack_dedup:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -546,8 +561,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="the_stack_dedup:1.0.0",
         splits={
-            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
