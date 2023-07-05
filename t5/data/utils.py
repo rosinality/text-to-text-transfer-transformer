@@ -18,8 +18,9 @@ import gin
 import seqio
 
 # DEFAULT_SPM_PATH = "gs://t5-data/vocabs/cc_all.32000/sentencepiece.model"  # GCS
+# DEFAULT_EXTRA_IDS = 100
 DEFAULT_SPM_PATH = "gs://fuzhao/tokenizers/llama.32k.100extra.model"  # GCS
-DEFAULT_EXTRA_IDS = 100
+DEFAULT_EXTRA_IDS = 0
 
 
 def get_default_vocabulary():
