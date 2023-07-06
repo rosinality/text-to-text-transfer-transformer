@@ -120,10 +120,6 @@ TaskRegistry.add(
     "c4_v220_ul2",
     source=seqio.TfdsDataSource(
         tfds_name="c4/en:3.0.1",
-        splits={
-            'train': 'train',
-            # 'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
-        },
     ),
     preprocessors=[
         functools.partial(
@@ -144,10 +140,6 @@ TaskRegistry.add(
     "c4_v220_ul2_noprefix",
     source=seqio.TfdsDataSource(
         tfds_name="c4/en:3.0.1",
-        splits={
-            'train': 'train',
-            # 'validation': f'validation[:{NUM_VAL_EXAMPLES}]',
-        },
     ),
     preprocessors=[
         functools.partial(
