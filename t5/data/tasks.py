@@ -269,9 +269,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_c4:1.0.0",
         splits={
-            'train': 'train',
-            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            # 'train': 'train',
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
@@ -294,9 +294,9 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_c4:1.0.0",
         splits={
-            'train': 'train',
-            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
-            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+            # 'train': 'train',
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
         },
     ),
     preprocessors=[
