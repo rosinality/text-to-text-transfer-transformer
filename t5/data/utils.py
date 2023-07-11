@@ -21,7 +21,7 @@ import seqio
 # DEFAULT_EXTRA_IDS = 100
 DEFAULT_SPM_PATH = "gs://fuzhao/tokenizers/umt5.256000/sentencepiece.model"  # GCS
 # DEFAULT_SPM_PATH = "gs://fuzhao/tokenizers/llama.32k.model"  # GCS
-DEFAULT_EXTRA_IDS = 100 # 300
+DEFAULT_EXTRA_IDS = 300
 
 
 def get_default_vocabulary():
