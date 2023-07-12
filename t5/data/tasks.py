@@ -575,6 +575,215 @@ TaskRegistry.add(
 
 
 
+# ========================OpenLLaMA Dataset=========================
+TaskRegistry.add(
+    "redpajama_stackexchange_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_stackexchange:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+# wiki dataset UL2
+TaskRegistry.add(
+    "redpajama_wikipedia_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_wikipedia:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+# C4 dataset UL2
+TaskRegistry.add(
+    "redpajama_c4_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_c4:1.0.0",
+        splits={
+            # 'train': 'train',
+            'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+# ArXiv dataset UL2
+TaskRegistry.add(
+    "redpajama_arxiv_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_arxiv:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+# Github dataset UL2
+TaskRegistry.add(
+    "redpajama_github_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_github:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+# Book dataset UL2
+TaskRegistry.add(
+    "redpajama_book_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_book:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+# Commoncrawl dataset UL2
+TaskRegistry.add(
+    "redpajama_common_crawl_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="redpajama_common_crawl:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+# The Stack dataset UL2
+TaskRegistry.add(
+    "the_stack_dedup_full_lm",
+    source=seqio.TfdsDataSource(
+        tfds_name="the_stack_dedup:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
 
 
 # Configurable tasks used for comparisons in Raffel et al., 2019.
