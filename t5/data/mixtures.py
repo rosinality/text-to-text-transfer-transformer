@@ -136,13 +136,13 @@ MixtureRegistry.add(
 MixtureRegistry.add(
     "mix_full_lm",
     [
-        ("redpajama_c4_ul2", 15.),
-        ("redpajama_wikipedia_ul2", 4.5),
-        ("redpajama_stackexchange_ul2", 2.0),
-        ("redpajama_arxiv_ul2", 2.5),
-        ("redpajama_book_ul2", 4.5),
-        ("redpajama_github_ul2", 4.5),
-        ("redpajama_common_crawl_ul2", 67.0),
+        ("redpajama_c4_full_lm", 15.),
+        ("redpajama_wikipedia_full_lm", 4.5),
+        ("redpajama_stackexchange_full_lm", 2.0),
+        ("redpajama_arxiv_full_lm", 2.5),
+        ("redpajama_book_full_lm", 4.5),
+        ("redpajama_github_full_lm", 4.5),
+        ("redpajama_common_crawl_full_lm", 67.0),
     ],
     default_rate=1.,
 )
