@@ -828,7 +828,7 @@ TaskRegistry.add(
 
 
 # =================================== GLUE =====================================
-for b in tfds.text.glue.Glue.builder_configs.values():
+for b in tfds.deprecated.text.glue.Glue.builder_configs.values():
   TaskRegistry.add(
       "glue_%s_v002" % b.name,
       source=seqio.TfdsDataSource(
@@ -911,7 +911,7 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES)
 
 # ================================= SuperGlue ==================================
-for b in tfds.text.super_glue.SuperGlue.builder_configs.values():
+for b in tfds.deprecated.text.super_glue.SuperGlue.builder_configs.values():
   # We use a simplified version of WSC, defined below
   if "wsc" in b.name:
     continue
