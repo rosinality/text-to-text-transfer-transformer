@@ -1097,10 +1097,9 @@ TaskRegistry.add(
         preprocessors.trivia_qa_nocontext,
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
-        preprocessors.trivia_qa_truncate_inputs,
         seqio.preprocessors.append_eos_after_trim,
     ],
-    metric_fns=[metrics.squad],
+    metric_fns=[metrics.trivia_qa],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
