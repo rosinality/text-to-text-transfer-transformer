@@ -298,7 +298,7 @@ def trivia_qa_nocontext(dataset):
     q = _pad_punctuation(x['question'])
     answers = x['answer']['normalized_aliases']
 
-    combination_size = tf.size(answers)*tf.size(contexts)
+    combination_size = tf.size(answers)# *tf.size(contexts)
     find_answers = tf.TensorArray(
         tf.bool, size=combination_size, dynamic_size=True)
     selected_answers = tf.TensorArray(
