@@ -1092,7 +1092,7 @@ TaskRegistry.add(
 
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
-    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0"),
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc.nocontext:1.1.0"),
     preprocessors=[
         preprocessors.trivia_qa_nocontext,
         seqio.preprocessors.tokenize,
