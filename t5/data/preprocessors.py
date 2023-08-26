@@ -283,7 +283,8 @@ def trivia_qa_nocontext(dataset):
     """Create TriviaQA example."""
     return {
         'inputs': f"Question: {x['question']}\nAnswer: ",
-        'targets': x['answer']['normalized_aliases'],
+        "targets": x["answer"]["value"],
+        "answers": x["answer"]["aliases"],
     }
 
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
