@@ -282,7 +282,7 @@ def trivia_qa_nocontext(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': f"Question: {x['question']}\nAnswer: ",
+        'inputs': _string_join(["Question: ", x['question'], "\nAnswer: "]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
