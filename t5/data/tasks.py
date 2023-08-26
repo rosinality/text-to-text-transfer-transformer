@@ -1114,18 +1114,9 @@ TaskRegistry.add(
         seqio.CacheDatasetPlaceholder(),
         seqio.preprocessors.append_eos,
     ],
-    postprocess_fn=tqa_open_postprocessor,
+    postprocess_fn=postprocessors.qa,
     metric_fns=[metrics.trivia_qa],
-    output_features={
-        "inputs": seqio.Feature(
-           t5.data.get_default_vocabulary(),
-           add_eos=False,
-        ),
-        "targets": seqio.Feature(
-           t5.data.get_default_vocabulary(),
-           add_eos=True,
-        ),
-    },
+    output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
