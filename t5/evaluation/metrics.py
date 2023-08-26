@@ -222,8 +222,6 @@ def trivia_qa(targets, predictions):
   Returns:
     dict with score_key: squad score across all targets and predictions
   """
-  targets: Sequence[Sequence[str]],
-  predictions: Sequence[str]
 ) -> Mapping[str, seqio.metrics.MetricValueValue]:
   """Computes official TriviaQA metrics.
 
