@@ -269,7 +269,7 @@ def trivia_qa_nocontext(dataset):
      'answer': {dict of all answers}, 'question': <question>,
      'question_id': <question_id>, 'question_source': <question_source>}
   This function will return flattend examples of the format:
-    {'inputs': 'question: <question> context: <article>'
+    {'inputs': 'Q: <question>\nA:'
      'targets': 'answer: <sampled answer>'}
 
   Args:
@@ -277,79 +277,13 @@ def trivia_qa_nocontext(dataset):
   Returns:
     A preprocessed tf.data.Dataset with the format listed above.
   """
-  def triviaqa_question_answer_context(x):
-    """Extracts matched contexts and answers.
 
-    Returns all matched (question-context, answer) pairs.
-
-    Args:
-      x: A tfds sample.
-
-    Returns:
-      Flattened samples: (question-context, answer).
-    """
-    contexts = []
-    if 'entity_pages' in x:
-      contexts.append(x['entity_pages']['wiki_context'])
-    if 'search_results' in x:
-      contexts.append(x['search_results']['search_context'])
-    contexts = tf.concat(contexts, 0)
-
-    q = _pad_punctuation(x['question'])
-    answers = x['answer']['normalized_aliases']
-
-    combination_size = tf.size(answers)*tf.size(contexts)
-    find_answers = tf.TensorArray(
-        tf.bool, size=combination_size, dynamic_size=True)
-    selected_answers = tf.TensorArray(
-        tf.string, size=combination_size, dynamic_size=True)
-    join_q_c = tf.TensorArray(
-        tf.string, size=combination_size, dynamic_size=True)
-
-    def cond_fn(i, find_answers, selected_answers, join_q_c):
-      del find_answers, selected_answers, join_q_c  # Unused
-      return tf.less(i, combination_size)
-
-    def body_fn(i, find_answers, selected_answers, join_q_c):
-      """Find answers from contexts and join."""
-      context_idx = tf.math.floordiv(i, tf.size(answers))
-      answer_idx = tf.math.mod(i, tf.size(answers))
-
-      a = _pad_punctuation(answers[answer_idx])
-      a_ = tf.strings.join(['.*', a, '.*'])
-      c = _pad_punctuation(contexts[context_idx])
-      find_a = tf.strings.regex_full_match(
-          tf.strings.lower(c),
-          tf.strings.lower(a_))
-      find_answers = find_answers.write(i, find_a)
-      selected_answers = selected_answers.write(i, a)
-
-      join_q_c_str = _string_join(["Please answer this question: ", q])
-      join_q_c = join_q_c.write(i, join_q_c_str)
-      return (i + 1, find_answers, selected_answers, join_q_c)
-
-    _, find_answers, selected_answers, join_q_c = tf.while_loop(
-        cond_fn,
-        body_fn,
-        loop_vars=[
-            tf.constant(0), find_answers, selected_answers,
-            join_q_c
-        ])
-    find_answers = find_answers.stack()
-    selected_answers = selected_answers.stack()
-    join_q_c = join_q_c.stack()
-
-    selected_answers = tf.boolean_mask(selected_answers, find_answers)
-    selected_join_q_c = tf.boolean_mask(join_q_c, find_answers)
-
-    return selected_join_q_c, selected_answers
 
   def my_fn(x):
     """Create TriviaQA example."""
-    join_q_c, a = triviaqa_question_answer_context(x)
     return {
-        'inputs': join_q_c,
-        'targets': a
+        'inputs': f"Question: {x['question']}\nAnswer: ",
+        'targets': x['answer']['normalized_aliases'],
     }
 
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
