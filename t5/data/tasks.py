@@ -1089,16 +1089,22 @@ TaskRegistry.add(
     metric_fns=[metrics.squad],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
-
+def _filter_trivia_qa(dataset):
+  def my_fn(example):
+    return 'value' in example['answer']
+  return dataset.filter(my_fn)
+    
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0", splits=["validation"]),
     preprocessors=[
+        _filter_trivia_qa,
         preprocessors.trivia_qa_nocontext,
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
         seqio.preprocessors.append_eos_after_trim,
     ],
+    postprocess_fn=postprocessors.qa,
     metric_fns=[metrics.trivia_qa],
     output_features=DEFAULT_OUTPUT_FEATURES)
 
