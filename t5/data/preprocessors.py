@@ -287,7 +287,7 @@ def trivia_qa_nocontext(dataset):
     }
 
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
-  return dataset.unbatch()
+  return dataset
 
 
 
