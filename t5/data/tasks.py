@@ -1096,7 +1096,10 @@ def _filter_trivia_qa(dataset):
     
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
-    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0", splits=["validation"]),
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
+                                splits={
+                                    'validation': f'validation[:256]',
+                                }),
     preprocessors=[
         _filter_trivia_qa,
         preprocessors.trivia_qa_nocontext,
