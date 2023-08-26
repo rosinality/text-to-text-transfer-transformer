@@ -1093,7 +1093,14 @@ def _filter_trivia_qa(dataset):
   def my_fn(example):
     return 'value' in example['answer']
   return dataset.filter(my_fn)
-    
+
+def tqa_open_postprocessor(output_or_target, example=None, is_target=False):
+  """Returns output as answer, or all answers if the full example is provided."""
+  if is_target:
+    return [a.decode("utf-8") for a in example["answers"]]
+  else:
+    return output_or_target.decode("utf-8")
+
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
@@ -1105,11 +1112,21 @@ TaskRegistry.add(
         preprocessors.trivia_qa_nocontext,
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
-        seqio.preprocessors.append_eos_after_trim,
+        seqio.preprocessors.append_eos,
     ],
-    postprocess_fn=postprocessors.qa,
+    postprocess_fn=tqa_open_postprocessor,
     metric_fns=[metrics.trivia_qa],
-    output_features=DEFAULT_OUTPUT_FEATURES)
+    output_features={
+        "inputs": seqio.Feature(
+           t5.data.get_default_vocabulary(),
+           add_eos=False,
+        ),
+        "targets": seqio.Feature(
+           t5.data.get_default_vocabulary(),
+           add_eos=True,
+        ),
+    },
+)
 
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
 
