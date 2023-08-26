@@ -222,9 +222,44 @@ def trivia_qa(targets, predictions):
   Returns:
     dict with score_key: squad score across all targets and predictions
   """
-  targets = [[qa_utils.normalize_trivia_qa(t) for t in u] for u in targets]
-  predictions = [qa_utils.normalize_trivia_qa(p) for p in predictions]
-  return qa_utils.qa_metrics(targets, predictions)
+  targets: Sequence[Sequence[str]],
+  predictions: Sequence[str]
+) -> Mapping[str, seqio.metrics.MetricValueValue]:
+  """Computes official TriviaQA metrics.
+
+  Args:
+    targets: list of lists of strings
+    predictions: list of strings
+
+  Returns:
+    dict with score_key: squad score across all targets and predictions
+  """
+
+  if len(targets) != len(predictions):
+    raise ValueError("Number of targets and predictions must match.")
+
+  def _normalize_answer(text):
+    """Lower text and remove punctuation, articles and extra whitespace."""
+    # Remove articles.
+    text = re.sub(r"\b(a|an|the)\b", " ", s)
+    # Remove punctuation.
+    for punc in string.punctuation:
+      text = text.replace(punc, '')
+    # Normalize white space
+    text = " ".join(s.split())
+    return text
+
+  # Normalize answers before comparing.
+  targets = [[_normalize_answer(t) for t in u] for u in targets]
+  predictions = [_normalize_answer(p) for p in predictions]
+
+  em = np.mean([
+      max(pred == gt for gt in ground_truths)
+      for pred, ground_truths in zip(predictions, targets)
+  ])
+  return {
+      "exact_match": seqio.metrics.Scalar(em),
+  }
 
 
 def accuracy(targets, predictions):
