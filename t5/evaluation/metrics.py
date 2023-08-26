@@ -239,7 +239,8 @@ def trivia_qa(targets, predictions):
   def _normalize_answer(text):
     """Lower text and remove punctuation, articles and extra whitespace."""
     # Remove articles.
-    text = re.sub(r"\b(a|an|the)\b", " ", s)
+    text = text.split("\n")[0]
+    text = re.sub(r"\b(a|an|the)\b", " ", text)
     # Remove punctuation.
     for punc in string.punctuation:
       text = text.replace(punc, '')
