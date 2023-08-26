@@ -1097,9 +1097,9 @@ def _filter_trivia_qa(dataset):
 def tqa_open_postprocessor(output_or_target, example=None, is_target=False):
   """Returns output as answer, or all answers if the full example is provided."""
   if is_target:
-    return [a.decode("utf-8") for a in example["answers"]]
+    return [a for a in example["answers"]]
   else:
-    return output_or_target.decode("utf-8")
+    return output_or_target
 
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
