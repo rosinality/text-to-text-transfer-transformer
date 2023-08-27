@@ -1099,7 +1099,7 @@ def tqa_open_postprocessor(output_or_target, example=None, is_target=False):
   if is_target:
     return [a for a in example["answers"]]
   else:
-    return output_or_target
+    return output_or_target.split("<extra_id_0> ")[1]
 
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
