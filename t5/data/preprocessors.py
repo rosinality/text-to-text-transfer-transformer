@@ -350,6 +350,22 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+
+
+def ul2_mmlu(dataset):
+
+  # prompt = "[S2S]Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis\n"
+  def my_fn(x):
+    """Create TriviaQA example."""
+    return {
+        'inputs': _string_join(["[NLU] ", x['prompt'], "<extra_id_0>" ]),
+        "targets": x["answer"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
+
 @seqio.map_over_dataset
 def squad(x, include_context=True):
   """Convert SQuAD examples to a text2text pair.
