@@ -1115,7 +1115,7 @@ TaskRegistry.add(
         seqio.preprocessors.append_eos,
     ],
     postprocess_fn=postprocessors.qa,
-    metric_fns=[metrics.trivia_qa],
+    metric_fns=[metrics.ul2_trivia_qa],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
