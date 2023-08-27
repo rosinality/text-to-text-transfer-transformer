@@ -351,6 +351,19 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
   return dataset
 
 
+def mmlu(dataset):
+
+  # prompt = "[S2S]Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis\n"
+  def my_fn(x):
+    """Create TriviaQA example."""
+    return {
+        'inputs': x['prompt'],
+        "targets": x["answer"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
 
 def ul2_mmlu(dataset):
 
