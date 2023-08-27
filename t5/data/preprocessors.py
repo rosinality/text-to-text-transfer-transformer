@@ -338,11 +338,11 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
     A preprocessed tf.data.Dataset with the format listed above.
   """
 
-  # prompt = "[S2S]Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis\n"
+  # prompt = "[S2S]Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\n"
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis\nQuestion: ", x['question'], "\nAnswer: <extra_id_0>" ]),
+        'inputs': _string_join(["[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\n\nQuestion: ", x['question'], "\nAnswer: <extra_id_0>.\n\n" ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
