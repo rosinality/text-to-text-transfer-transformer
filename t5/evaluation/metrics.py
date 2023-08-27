@@ -246,6 +246,11 @@ def accuracy(targets, predictions):
   return {"accuracy": 100*sklearn.metrics.accuracy_score(targets, predictions)}
 
 
+def ul2_accuracy(targets, predictions):
+  predictions = [p.split("<extra_id_0> ")[-1] for p in predictions]
+  return accuracy(targets, predictions)
+
+
 def sequence_accuracy(targets, predictions):
   """Computes per-sequence accuracy.
 
