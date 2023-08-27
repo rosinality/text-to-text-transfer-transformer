@@ -1169,12 +1169,12 @@ TaskRegistry.add(
                                     'validation': f'train[:256]',
                                 }),
     preprocessors=[
-        preprocessors.ul2_mmlu,
+        preprocessors.mmlu,
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
         seqio.preprocessors.append_eos,
     ],
-    metric_fns=[metrics.ul2_accuracy],
+    metric_fns=[metrics.accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
