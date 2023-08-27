@@ -1157,6 +1157,32 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
+
+
+# ==================================MMLU==================================
+
+
+TaskRegistry.add(
+    "ul2_mmlu",
+    source=seqio.TfdsDataSource(tfds_name="mmlu:1.0.0",
+                                splits={
+                                    'validation': f'train[:256]',
+                                }),
+    preprocessors=[
+        preprocessors.ul2_mmlu,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    metric_fns=[metrics.accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
+
+
+
+
+
+
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
 
 
