@@ -1174,7 +1174,7 @@ TaskRegistry.add(
         seqio.CacheDatasetPlaceholder(),
         seqio.preprocessors.append_eos,
     ],
-    metric_fns=[metrics.accuracy],
+    metric_fns=[metrics.ul2_accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
