@@ -1249,7 +1249,7 @@ TaskRegistry.add(
         seqio.preprocessors.append_eos,
     ],
     postprocess_fn=postprocessors.ul2_humaneval,
-    metric_fns=[],
+    metric_fns=[metrics.accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
