@@ -361,7 +361,7 @@ def ul2_trivia_qa_nocontext_fewshot(dataset):
     surfix += "Question: Which musical featured the song Flash Bang, Wallop?\nAnswer: One-half.\n"
     surfix += "Question: Neil Armstrong was a pilot in which war?\nAnswer: Korean.\n"
     return {
-        'inputs': _string_join([prefix, x['question'],  ]),
+        'inputs': _string_join([prefix, x['question'], surfix ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
