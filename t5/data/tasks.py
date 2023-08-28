@@ -1240,7 +1240,7 @@ TaskRegistry.add(
     "ul2_humaneval",
     source=seqio.TfdsDataSource(tfds_name="human_eval:1.0.0",
                                 splits={
-                                    'validation': f'train[:64]',
+                                    'validation': f'train',
                                 }),
     preprocessors=[
         preprocessors.ul2_humaneval,
