@@ -429,6 +429,20 @@ def ul2_lambada(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def ul2_humaneval(dataset):
+
+  def my_fn(example):
+    """Create lambada example."""
+    return {
+        'inputs': _string_join(["[S2S] ", example["prompt"], "<extra_id_0>" ]),
+        "targets": example["canonical_solution"],
+        "task_id": example["task_id"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
+
 @seqio.map_over_dataset
 def squad(x, include_context=True):
   """Convert SQuAD examples to a text2text pair.
