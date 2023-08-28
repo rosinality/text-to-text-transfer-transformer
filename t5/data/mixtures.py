@@ -114,7 +114,7 @@ MixtureRegistry.add(
         ("redpajama_book_ul2", 4.5),
         ("redpajama_github_ul2", 4.5),
         ("redpajama_common_crawl_ul2", 67.0),
-        ("the_stack_dedup_ul2", 4.5),
+        ("the_stack_dedup_ul2", 14.5),
     ],
     default_rate=1.,
 )
