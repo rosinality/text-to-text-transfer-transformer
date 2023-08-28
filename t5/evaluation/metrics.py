@@ -238,7 +238,7 @@ def ul2_trivia_qa(targets, predictions):
     dict with score_key: squad score across all targets and predictions
   """
   targets = [[qa_utils.normalize_trivia_qa(t) for t in u] for u in targets]
-  predictions = [qa_utils.normalize_trivia_qa(p.split("<extra_id_0> ")[-1]) for p in predictions]
+  predictions = [qa_utils.normalize_trivia_qa(p.split("<extra_id_0> ")[-1].split(".")[0]) for p in predictions]
   return qa_utils.qa_metrics(targets, predictions)
 
 
@@ -250,7 +250,7 @@ def mmlu_accuracy(targets, predictions):
   return accuracy(targets, predictions)
 
 def ul2_accuracy(targets, predictions):
-  predictions = [p.split("<extra_id_0> ")[-1].split(".")[0] for p in predictions]
+  predictions = [p.split("<extra_id_0> ")[-1] for p in predictions]
   return accuracy(targets, predictions)
 
 
