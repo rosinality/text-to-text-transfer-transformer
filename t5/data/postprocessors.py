@@ -38,6 +38,7 @@ def lower_text(string, **unused_kwargs):
   return string.lower()
 
 
+
 def string_label_to_class_id(string_label,
                              label_classes,
                              default=-1,
@@ -151,3 +152,19 @@ def rank_classification(score,
     return tuple(outputs)
   else:
     return score
+
+def take_first_word(answer: str,
+                    example: Optional[Mapping[str, Any]] = None,
+                    is_target: bool = False,
+                    lower_case: bool = False) -> str:
+  """Take the first word in prediction."""
+  del example
+  if is_target:
+    return answer
+  answer = answer.strip()
+  answer = answer.split("\n")[0].split(" ")[0]
+  if answer and answer[-1] in [";", ".", ","]:
+    answer = answer[:-1]
+  if lower_case:
+    answer = answer.lower()
+  return answer
