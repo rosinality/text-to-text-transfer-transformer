@@ -1198,7 +1198,7 @@ TaskRegistry.add(
 # ==================================LAMBADA==================================
 
 TaskRegistry.add(
-    "ul2_mmlu",
+    "lambada",
     source=seqio.TfdsDataSource(tfds_name="lambada:1.0.0",
                                 splits={
                                     'validation': f'test[:256]',
