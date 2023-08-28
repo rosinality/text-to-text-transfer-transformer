@@ -1195,8 +1195,23 @@ TaskRegistry.add(
 )
 
 
+# ==================================LAMBADA==================================
 
-
+TaskRegistry.add(
+    "ul2_mmlu",
+    source=seqio.TfdsDataSource(tfds_name="lambada:1.0.0",
+                                splits={
+                                    'validation': f'test[:256]',
+                                }),
+    preprocessors=[
+        preprocessors.lambada,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    metric_fns=[metrics.lambada_accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
 
 
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
