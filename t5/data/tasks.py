@@ -1161,7 +1161,7 @@ TaskRegistry.add(
     "trivia_qa_v010_nocontext_fewshot",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
                                 splits={
-                                    'validation': f'validation[:256]',
+                                    'validation': f'validation',
                                 }),
     preprocessors=[
         _filter_trivia_qa,
