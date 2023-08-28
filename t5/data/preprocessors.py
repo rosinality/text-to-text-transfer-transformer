@@ -355,7 +355,7 @@ def ul2_trivia_qa_nocontext_fewshot(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     prefix = "[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\nQuestion: "
-    surfix = "\nAnswer: <extra_id_0> .\n"
+    surfix = "\nAnswer: <extra_id_0> \n"
     surfix += "Question: Which branch of medicine is concerned with disorders of the blood?\nAnswer: Automated hematology.\n"
     surfix += "Question: What are the international registration letters of a vehicle from Turkey?\nAnswer: T.R.\n"
     surfix += "Question: Which musical featured the song Flash Bang, Wallop?\nAnswer: One-half.\n"
