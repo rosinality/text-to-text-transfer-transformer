@@ -388,7 +388,7 @@ def ul2_mmlu(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["[NLU] ", x['prompt'], "<extra_id_0>" ]),
+        'inputs': _string_join(["[NLU] ", x['prompt'], " <extra_id_0>" ]),
         "targets": x["answer"],
     }
 
@@ -422,7 +422,7 @@ def ul2_lambada(dataset):
       example, 0,
       tf.strings.length(example) - tf.strings.length(answer) - 1)
     return {
-        'inputs': _string_join(["[NLU] ", except_last_word, "<extra_id_0>" ]),
+        'inputs': _string_join(["[NLU] ", except_last_word, " <extra_id_0>" ]),
         "targets": answer,
     }
 
@@ -435,7 +435,7 @@ def ul2_humaneval(dataset):
     """Create lambada example."""
     prompt = "Complete the following Python code without any tests or explanation\n"
     return {
-        'inputs': _string_join(["[S2S] ", prompt, example["prompt"], "<extra_id_0>" ]),
+        'inputs': _string_join(["[NLG] ", prompt, example["prompt"], " <extra_id_0>" ]),
         "targets": example["canonical_solution"],
         "task_id": example["task_id"],
     }
