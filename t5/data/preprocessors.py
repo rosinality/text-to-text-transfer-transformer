@@ -163,6 +163,11 @@ def _string_join(lst):
   out = tf.strings.join(lst, separator=' ')
   return tf.strings.regex_replace(out, r'\s+', ' ')
 
+def _string_join_simple(lst):
+  # Join on space, but collapse consecutive spaces.
+  return tf.strings.join(lst, separator=' ')
+  # return tf.strings.regex_replace(out, r'\s+', ' ')
+
 
 def trivia_qa(dataset):
   """Convert a TriviaQA example to multiple flattened examples.
@@ -281,7 +286,7 @@ def trivia_qa_nocontext(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["Question: ", x['question'], "\nAnswer: " ]),
+        'inputs': _string_join_simple(["Question: ", x['question'], "\nAnswer: " ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
@@ -312,7 +317,7 @@ def ul2_trivia_qa_nocontext(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["[NLU] Question: ", x['question'], "\nAnswer: <extra_id_0>" ]), # Answer the following trivia question:\n
+        'inputs': _string_join_simple(["[NLU] Question: ", x['question'], "\nAnswer: <extra_id_0>" ]), # Answer the following trivia question:\n
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
@@ -342,7 +347,7 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\n\nQuestion: ", x['question'], "\nAnswer: <extra_id_0> ." ]),
+        'inputs': _string_join_simple(["[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\n\nQuestion: ", x['question'], "\nAnswer: <extra_id_0> ." ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
@@ -361,7 +366,7 @@ def ul2_trivia_qa_nocontext_fewshot(dataset):
     prefix += "Question: Neil Armstrong was a pilot in which war?\nAnswer: Korean.\nQuestion: "
     suffix = "\nAnswer: <extra_id_0>"
     return {
-        'inputs': _string_join([prefix, x['question'], suffix ]),
+        'inputs': _string_join_simple([prefix, x['question'], suffix ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
@@ -388,7 +393,7 @@ def ul2_mmlu(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["[NLU] ", x['prompt'], " <extra_id_0>" ]),
+        'inputs': _string_join_simple(["[NLU] ", x['prompt'], " <extra_id_0>" ]),
         "targets": x["answer"],
     }
 
@@ -422,7 +427,7 @@ def ul2_lambada(dataset):
       example, 0,
       tf.strings.length(example) - tf.strings.length(answer) - 1)
     return {
-        'inputs': _string_join(["[NLU] ", except_last_word, " <extra_id_0>" ]),
+        'inputs': _string_join_simple(["[NLU] ", except_last_word, " <extra_id_0>" ]),
         "targets": answer,
     }
 
@@ -435,7 +440,7 @@ def ul2_humaneval(dataset):
     """Create lambada example."""
     prompt = "Complete the following Python code without any tests or explanation\n"
     return {
-        'inputs': _string_join(["[S2S] ", prompt, example["prompt"], " <extra_id_0>" ]),
+        'inputs': _string_join_simple(["[S2S] ", prompt, example["prompt"], " <extra_id_0>" ]),
         "targets": example["canonical_solution"],
         "task_id": example["task_id"],
     }
