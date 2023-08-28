@@ -250,7 +250,7 @@ def mmlu_accuracy(targets, predictions):
   return accuracy(targets, predictions)
 
 def ul2_accuracy(targets, predictions):
-  predictions = [p.split("<extra_id_0> ")[-1] for p in predictions]
+  predictions = [p.split("<extra_id_0> ")[-1].split(".")[0] for p in predictions]
   return accuracy(targets, predictions)
 
 
