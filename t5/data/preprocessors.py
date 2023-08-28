@@ -422,7 +422,7 @@ def ul2_lambada(dataset):
       example, 0,
       tf.strings.length(example) - tf.strings.length(answer) - 1)
     return {
-        'inputs': _string_join(["[S2S] ", except_last_word, "<extra_id_0>" ]),
+        'inputs': _string_join(["[NLU] ", except_last_word, "<extra_id_0>" ]),
         "targets": answer,
     }
 
