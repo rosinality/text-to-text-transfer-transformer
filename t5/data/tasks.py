@@ -1175,6 +1175,7 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
+
 # ==================================MMLU==================================
 
 
@@ -1230,6 +1231,31 @@ TaskRegistry.add(
     metric_fns=[metrics.accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
+
+
+
+# ==================================HumanEval==================================
+
+TaskRegistry.add(
+    "ul2_humaneval",
+    source=seqio.TfdsDataSource(tfds_name="'huggingface:openai_humaneval/openai_humaneval'",
+                                splits={
+                                    'validation': f'test',
+                                }),
+    preprocessors=[
+        preprocessors.ul2_humaneval,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    postprocess_fn=postprocessors.ul2_humaneval,
+    metric_fns=[],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
+
+
+
+
 
 
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
