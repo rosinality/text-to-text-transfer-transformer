@@ -153,10 +153,10 @@ def rank_classification(score,
   else:
     return score
 
-def take_first_word(answer: str,
-                    example: Optional[Mapping[str, Any]] = None,
-                    is_target: bool = False,
-                    lower_case: bool = False) -> str:
+def take_first_word(answer,
+                    example=None,
+                    is_target = False,
+                    lower_case = False):
   """Take the first word in prediction."""
   del example
   if is_target:
