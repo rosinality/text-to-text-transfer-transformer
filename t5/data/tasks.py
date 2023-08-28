@@ -1209,7 +1209,8 @@ TaskRegistry.add(
         seqio.CacheDatasetPlaceholder(),
         seqio.preprocessors.append_eos,
     ],
-    metric_fns=[metrics.lambada_accuracy],
+    postprocess_fn=postprocessors.take_first_word,
+    metric_fns=[metrics.accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
