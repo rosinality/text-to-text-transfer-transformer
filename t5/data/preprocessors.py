@@ -433,8 +433,9 @@ def ul2_humaneval(dataset):
 
   def my_fn(example):
     """Create lambada example."""
+    prompt = "Complete the following Python code without any tests or explanation\n"
     return {
-        'inputs': _string_join(["[S2S] ", example["prompt"], "<extra_id_0>" ]),
+        'inputs': _string_join(["[S2S] ", prompt, example["prompt"], "<extra_id_0>" ]),
         "targets": example["canonical_solution"],
         "task_id": example["task_id"],
     }
