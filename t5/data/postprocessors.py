@@ -168,3 +168,20 @@ def take_first_word(answer,
   if lower_case:
     answer = answer.lower()
   return answer
+
+def ul2_take_first_word(answer,
+                    example=None,
+                    is_target = False,
+                    lower_case = False):
+  """Take the first word in prediction."""
+  del example
+  if is_target:
+    return answer
+  answer = answer.split("<extra_id_0> ")[-1]
+  answer = answer.strip()
+  answer = answer.split("\n")[0].split(" ")[0]
+  if answer and answer[-1] in [";", ".", ","]:
+    answer = answer[:-1]
+  if lower_case:
+    answer = answer.lower()
+  return answer
