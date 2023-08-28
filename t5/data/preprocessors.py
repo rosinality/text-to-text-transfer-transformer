@@ -342,7 +342,7 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': _string_join(["[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\n\nQuestion: ", x['question'], "\nAnswer: <extra_id_0>." ]),
+        'inputs': _string_join(["[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\n\nQuestion: ", x['question'], "\nAnswer: <extra_id_0> ." ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
@@ -351,9 +351,26 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
   return dataset
 
 
+def ul2_trivia_qa_nocontext_fewshot(dataset):
+  def my_fn(x):
+    """Create TriviaQA example."""
+    prefix = "[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis.\nQuestion: "
+    surfix = "\nAnswer: <extra_id_0> .\n"
+    surfix += "Question: Which branch of medicine is concerned with disorders of the blood?\nAnswer: Automated hematology.\n"
+    surfix += "Question: What are the international registration letters of a vehicle from Turkey?\nAnswer: T.R.\n"
+    surfix += "Question: Which musical featured the song Flash Bang, Wallop?\nAnswer: One-half.\n"
+    surfix += "Question: Neil Armstrong was a pilot in which war?\nAnswer: Korean.\n"
+    return {
+        'inputs': _string_join([prefix, x['question'],  ]),
+        "targets": x["answer"]["value"],
+        "answers": x["answer"]["aliases"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
 def mmlu(dataset):
 
-  # prompt = "[S2S]Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930?\nAnswer: sinclair lewis\n"
   def my_fn(x):
     """Create TriviaQA example."""
     return {
