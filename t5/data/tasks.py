@@ -1122,7 +1122,7 @@ TaskRegistry.add(
 
 TaskRegistry.add(
     "trivia_qa_v010_nocontext",
-    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.noncontext:1.1.0",
                                 splits={
                                     'validation': f'validation[:256]',
                                 }),
