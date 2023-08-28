@@ -1238,9 +1238,9 @@ TaskRegistry.add(
 
 TaskRegistry.add(
     "ul2_humaneval",
-    source=seqio.TfdsDataSource(tfds_name="'huggingface:openai_humaneval/openai_humaneval'",
+    source=seqio.TfdsDataSource(tfds_name="'humaneval:1.0.0'",
                                 splits={
-                                    'validation': f'test',
+                                    'validation': f'train',
                                 }),
     preprocessors=[
         preprocessors.ul2_humaneval,
