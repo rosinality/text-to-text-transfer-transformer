@@ -412,6 +412,22 @@ def lambada(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def ul2_lambada(dataset):
+
+  def my_fn(example):
+    """Create lambada example."""
+    example = tf.strings.strip(example["passage"])
+    answer = tf.strings.split(example, sep=" ")[-1]
+    except_last_word = tf.strings.substr(
+      example, 0,
+      tf.strings.length(example) - tf.strings.length(answer) - 1)
+    return {
+        'inputs': _string_join(["[S2S] ", except_last_word, "<extra_id_0>" ]),
+        "targets": answer,
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
 
 @seqio.map_over_dataset
 def squad(x, include_context=True):
