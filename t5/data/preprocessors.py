@@ -476,7 +476,7 @@ def ul2_boolq(dataset):
     """Create lambada example."""
     return {
         'inputs': tf.strings.join(
-          ["[NLU] ", 
+          ["[S2S] ", 
            example["text"], 
            "\n\n\nQuestion: ", 
            example["question"], 
