@@ -1254,6 +1254,28 @@ TaskRegistry.add(
 )
 
 
+# ==================================bool_q==================================
+
+
+
+TaskRegistry.add(
+    "ul2_boolq",
+    source=seqio.TfdsDataSource(tfds_name="bool_q:1.0.0",
+                                splits={
+                                    'validation': f'validation[:64]',
+                                }),
+    preprocessors=[
+        preprocessors._process_boolq,
+        preprocessors.format_options,
+        preprocessors.ul2_boolq,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    postprocess_fn=postprocessors.ul2_boolq,
+    metric_fns=[metrics.accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
 
 
 
