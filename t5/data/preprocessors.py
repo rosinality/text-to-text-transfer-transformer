@@ -365,7 +365,7 @@ def ul2_trivia_qa_nocontext_fewshot(dataset):
     prefix += "Question: What are the international registration letters of a vehicle from Turkey?\nAnswer: T.R.\n"
     prefix += "Question: Which musical featured the song Flash Bang, Wallop?\nAnswer: One-half.\n"
     prefix += "Question: Neil Armstrong was a pilot in which war?\nAnswer: Korean.\nQuestion: "
-    suffix = "\nAnswer: <extra_id_0>.\n"
+    suffix = "\nAnswer: <extra_id_0>"
     return {
         'inputs': tf.strings.join([prefix, x['question'], suffix], separator=''),
         "targets": x["answer"]["value"],
