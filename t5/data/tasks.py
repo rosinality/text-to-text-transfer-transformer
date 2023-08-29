@@ -1273,7 +1273,7 @@ TaskRegistry.add(
         seqio.preprocessors.append_eos,
     ],
     postprocess_fn=postprocessors.ul2_boolq,
-    metric_fns=[metrics.accuracy],
+    metric_fns=[metrics.ul2_boolq_accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
