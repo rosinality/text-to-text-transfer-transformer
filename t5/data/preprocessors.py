@@ -171,7 +171,7 @@ def _string_join_simple(lst):
 @seqio.map_over_dataset
 def _process_boolq(example):
   one_hot = tf.one_hot(tf.cast(example['answer'], tf.int32), 2)
-  options = tf.constant(['no', 'yes'])
+  options = tf.constant(['False', 'True'])
   return {
       'title': example['title'],
       'text': example['passage'],
