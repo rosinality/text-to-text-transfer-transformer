@@ -168,6 +168,27 @@ def _string_join_simple(lst):
   return tf.strings.join(lst, separator=' ')
   # return tf.strings.regex_replace(out, r'\s+', ' ')
 
+@seqio.map_over_dataset
+def _process_boolq(example):
+  one_hot = tf.one_hot(tf.cast(example['answer'], tf.int32), 2)
+  options = tf.constant(['no', 'yes'])
+  return {
+      'title': example['title'],
+      'text': example['passage'],
+      'question': example['question'],
+      'options': options,
+      'answer': tf.boolean_mask(options, one_hot)[0],
+  }
+
+@seqio.map_over_dataset
+def format_options(example):
+  """Formats options for FLAN tasks."""
+  example['options_'] = tf.strings.reduce_join([
+      'OPTIONS:\n- ',
+      tf.strings.reduce_join(example['options'], separator='\n- ')
+  ])
+  return example
+
 
 def trivia_qa(dataset):
   """Convert a TriviaQA example to multiple flattened examples.
@@ -444,6 +465,27 @@ def ul2_humaneval(dataset):
         'inputs': _string_join_simple(["[S2S] ", prompt, example["prompt"], " <extra_id_0>" ]),
         "targets": example["canonical_solution"],
         "task_id": example["task_id"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
+def ul2_boolq(dataset):
+
+  def my_fn(example):
+    """Create lambada example."""
+    return {
+        'inputs': tf.strings.join(
+          ["[NLU] ", 
+           example["text"], 
+           "\n\nWhat's the best answer to this question: ", 
+           example["question"], 
+           "?\n\n", 
+           example["options_"], 
+           "\n\nThe best answer: <extra_id_0>" 
+          ],
+          separator=''),
+        "targets": example["answer"],
     }
 
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
