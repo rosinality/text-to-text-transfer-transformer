@@ -1103,9 +1103,9 @@ def tqa_open_postprocessor(output_or_target, example=None, is_target=False):
 
 TaskRegistry.add(
     "trivia_qa_wo_ul2_v010_nocontext",
-    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
-                                    'validation': f'validation',
+                                    'validation': f'validation[:256]',
                                 }),
     preprocessors=[
         _filter_trivia_qa,
@@ -1141,7 +1141,7 @@ TaskRegistry.add(
 
 TaskRegistry.add(
     "trivia_qa_v010_nocontext_oneshot",
-    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
                                     'validation': f'validation[:256]',
                                 }),
@@ -1159,9 +1159,9 @@ TaskRegistry.add(
 
 TaskRegistry.add(
     "trivia_qa_v010_nocontext_fewshot",
-    source=seqio.TfdsDataSource(tfds_name="trivia_qa/rc:1.1.0",
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
-                                    'validation': f'validation',
+                                    'validation': f'validation[:256]',
                                 }),
     preprocessors=[
         _filter_trivia_qa,
