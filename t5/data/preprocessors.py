@@ -318,7 +318,7 @@ def ul2_trivia_qa_nocontext(dataset):
     """Create TriviaQA example."""
     return {
         'inputs': _string_join_simple([
-          "[NLU] Question: ", x['question'], "\nAnswer: <extra_id_0>\n" ]),
+          "[NLU] Question: ", x['question'], " Answer: <extra_id_0>" ]),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
