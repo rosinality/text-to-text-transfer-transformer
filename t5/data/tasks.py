@@ -1262,7 +1262,7 @@ TaskRegistry.add(
     "ul2_boolq",
     source=seqio.TfdsDataSource(tfds_name="bool_q:1.0.0",
                                 splits={
-                                    'validation': f'validation[:256]',
+                                    'validation': f'validation',
                                 }),
     preprocessors=[
         preprocessors._process_boolq,
