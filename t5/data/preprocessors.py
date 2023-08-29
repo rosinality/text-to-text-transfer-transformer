@@ -360,14 +360,14 @@ def ul2_trivia_qa_nocontext_oneshot(dataset):
 def ul2_trivia_qa_nocontext_fewshot(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
-    prefix = "[S2S] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930? Answer: sinclair lewis.\n"
+    prefix = "[NLU] Question: Which American-born Sinclair won the Nobel Prize for Literature in 1930? Answer: sinclair lewis.\n"
     prefix += "Question: Which branch of medicine is concerned with disorders of the blood?\nAnswer: Automated hematology.\n"
     prefix += "Question: What are the international registration letters of a vehicle from Turkey?\nAnswer: T.R.\n"
     prefix += "Question: Which musical featured the song Flash Bang, Wallop?\nAnswer: One-half.\n"
     prefix += "Question: Neil Armstrong was a pilot in which war?\nAnswer: Korean.\nQuestion: "
-    suffix = "\nAnswer: <extra_id_0>"
+    suffix = "\nAnswer: <extra_id_0>.\n"
     return {
-        'inputs': _string_join_simple([prefix, x['question'], suffix ]),
+        'inputs': tf.strings.join([prefix, x['question'], suffix], separator=''),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
