@@ -207,6 +207,14 @@ def ul2_boolq(answer,
     return answer
   # answer
   answer = answer.split("<extra_id_0>")[-1].replace(".", "").replace("\n", "").lower().strip()
+  if answer.startswith("yes"):
+    answer = "yes"
+  elif answer.startswith("no"):
+    answer = "no"
+  elif "yes" in answer:
+    answer = "yes"
+  elif "no" in answer:
+    answer = "no"
   if (answer != "yes") and (answer != "no"):
     print(f"Warning: Unrecognize{answer}")
     answer = "no"
