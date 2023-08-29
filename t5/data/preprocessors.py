@@ -482,7 +482,7 @@ def ul2_boolq(dataset):
            example["question"], 
            "?\n\n", 
            example["options_"], 
-           "\n\nThe best answer: <extra_id_0>" 
+           "\n\nAnswer: <extra_id_0>" 
           ],
           separator=''),
         "targets": example["answer"],
