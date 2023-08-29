@@ -196,3 +196,14 @@ def ul2_humaneval(answer,
     return answer
   answer = answer.split("<extra_id_0> ")[-1]
   return answer
+
+def ul2_boolq(answer,
+                    example=None,
+                    is_target = False,
+                    lower_case = False):
+  """Take the first word in prediction."""
+  del example
+  if is_target:
+    return answer
+  answer = answer.split("<extra_id_0> ")[-1]
+  return answer
