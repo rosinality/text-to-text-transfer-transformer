@@ -260,7 +260,7 @@ def replace_punctuation(s, punc_chars, punc_repl):
 def ul2_boolq_accuracy(targets, predictions):
   predictions = [
     replace_punctuation(
-      p.split("<extra_id_0> ")[-1].replace("\n", ""), 
+      p.split("<extra_id_0> ")[-1].replace("\n", "").lower(), 
       punc_chars=string.punctuation + "‘’´`_", 
       punc_repl=" ",
      ).strip() for p in predictions]
