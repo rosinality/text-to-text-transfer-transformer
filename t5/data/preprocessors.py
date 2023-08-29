@@ -478,7 +478,7 @@ def ul2_boolq(dataset):
         'inputs': tf.strings.join(
           ["[NLU] ", 
            example["text"], 
-           "\n\nWhat's the best answer to this question: ", 
+           "\n\n\nQuestion: ", 
            example["question"], 
            "?\n\n", 
            example["options_"], 
