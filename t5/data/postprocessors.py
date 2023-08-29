@@ -205,5 +205,6 @@ def ul2_boolq(answer,
   del example
   if is_target:
     return answer
-  answer = answer.split("<extra_id_0> ")[-1].split("<extra_id_0> ")[-1].replace(".", "").replace("\n", "").lower()
+  # answer
+  answer = answer.split("<extra_id_0>")[-1].split("<extra_id_0> ")[-1].replace(".", "").replace("\n", "").lower()
   return answer
