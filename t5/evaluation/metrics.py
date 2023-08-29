@@ -253,8 +253,17 @@ def ul2_accuracy(targets, predictions):
   predictions = [p.split("<extra_id_0> ")[-1] for p in predictions]
   return accuracy(targets, predictions)
 
+def replace_punctuation(s, punc_chars, punc_repl):
+  to_replace = set(punc_chars)
+  return "".join(punc_repl if ch in to_replace else ch for ch in s)
+
 def ul2_boolq_accuracy(targets, predictions):
-  predictions = [p.split("<extra_id_0> ")[-1].split("\n")[0] for p in predictions]
+  predictions = [
+    replace_punctuation(
+      p.split("<extra_id_0> ")[-1].replace("\n", ""), 
+      punc_chars=string.punctuation + "‘’´`_", 
+      punc_repl=" ",
+     ).strip() for p in predictions]
   return accuracy(targets, predictions)
 
 def sequence_accuracy(targets, predictions):
