@@ -216,6 +216,6 @@ def ul2_boolq(answer,
   elif "no" in answer:
     answer = "no"
   if (answer != "yes") and (answer != "no"):
-    print(f"Warning: Unrecognize{answer}")
+    print(f"Warning: Unrecognize: {answer}")
     answer = "no"
   return answer
