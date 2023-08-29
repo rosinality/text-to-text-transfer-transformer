@@ -1105,7 +1105,7 @@ TaskRegistry.add(
     "trivia_qa_wo_ul2_v010_nocontext",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
-                                    'validation': f'validation[:256]',
+                                    'validation': f'validation',
                                 }),
     preprocessors=[
         _filter_trivia_qa,
@@ -1124,7 +1124,7 @@ TaskRegistry.add(
     "trivia_qa_v010_nocontext",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
-                                    'validation': f'validation[:256]',
+                                    'validation': f'test',
                                 }),
     preprocessors=[
         _filter_trivia_qa,
