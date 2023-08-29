@@ -253,6 +253,18 @@ def ul2_accuracy(targets, predictions):
   predictions = [p.split("<extra_id_0> ")[-1] for p in predictions]
   return accuracy(targets, predictions)
 
+def ul2_boolq_accuracy(targets, predictions):
+  predictions = []
+  for p in predictions
+    tmp_p = p.split("<extra_id_0> ")[-1]
+    if "yes" == tmp_p[:3]:
+      result = "yes"
+    elif "no" == tmp_p[:2]:
+      result = "no"
+    else:
+      result = "none"
+    predictions.append(result)
+  return accuracy(targets, predictions)
 
 def sequence_accuracy(targets, predictions):
   """Computes per-sequence accuracy.
