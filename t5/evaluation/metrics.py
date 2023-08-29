@@ -255,7 +255,7 @@ def ul2_accuracy(targets, predictions):
 
 def ul2_boolq_accuracy(targets, predictions):
   predictions = []
-  for p in predictions
+  for p in predictions:
     tmp_p = p.split("<extra_id_0> ")[-1]
     if "yes" == tmp_p[:3]:
       result = "yes"
