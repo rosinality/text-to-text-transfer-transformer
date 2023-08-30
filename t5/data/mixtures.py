@@ -123,13 +123,14 @@ MixtureRegistry.add(
     "mix_ul2_stage2",
     [
         ("redpajama_c4_ul2", 15.),
-        ("redpajama_wikipedia_ul2", 8.0),
+        ("redpajama_wikipedia_ul2", 6.5),
+        ("wikipedia_ul2", 6.5),
         ("redpajama_stackexchange_ul2", 2.0),
         ("redpajama_arxiv_ul2", 4.0),
         ("redpajama_book_ul2", 6.0),
         ("redpajama_github_ul2", 5.0),
         ("redpajama_common_crawl_ul2", 45.0),
-        ("the_stack_dedup_ul2", 15.0),
+        ("the_stack_dedup_ul2", 10.0),
     ],
     default_rate=1.,
 )
