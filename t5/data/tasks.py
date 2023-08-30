@@ -238,6 +238,32 @@ TaskRegistry.add(
     metric_fns=[])
 
 TaskRegistry.add(
+    "wikipedia_ul2",
+    source=seqio.TfdsDataSource(
+        tfds_name="wikipedia/20190301.en:1.0.0",
+        splits={
+            'train': 'train',
+            # 'train': f'train[:-{NUM_VAL_EXAMPLES}]',
+            # 'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
+
+
+TaskRegistry.add(
     "redpajama_wikipedia_ul2_noprefix",
     source=seqio.TfdsDataSource(
         tfds_name="redpajama_wikipedia:1.0.0",
