@@ -474,20 +474,31 @@ def ul2_boolq(dataset):
 
   def my_fn(example):
     """Create lambada example."""
+    # return {
+    #     'inputs': tf.strings.join(
+    #       ["[NLU] , 
+    #        example["text"], 
+    #        "\n\n\nQuestion: ", 
+    #        example["question"], 
+    #        "?\n\n", 
+    #        example["options_"], 
+    #        "\n\nAnswer: <extra_id_0>" 
+    #       ],
+    #       separator=''),
+    #     "targets": example["answer"],
+    # }
     return {
         'inputs': tf.strings.join(
-          ["[NLU] Passage: ", 
+          ["[NLU] , 
            example["text"], 
-           "\n\n\nQuestion: ", 
+           "Question: ", 
            example["question"], 
-           "?\n\n", 
-           example["options_"], 
-           "\n\nAnswer: <extra_id_0>" 
+           "? yes or no?", 
+           " Answer: <extra_id_0>" 
           ],
           separator=''),
         "targets": example["answer"],
     }
-
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
