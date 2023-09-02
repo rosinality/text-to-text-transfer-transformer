@@ -489,7 +489,7 @@ def ul2_boolq(dataset):
     # }
     return {
         'inputs': tf.strings.join(
-          ["[NLU] , 
+          ["[NLU] ", 
            example["text"], 
            "Question: ", 
            example["question"], 
