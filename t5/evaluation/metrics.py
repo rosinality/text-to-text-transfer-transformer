@@ -258,14 +258,20 @@ def replace_punctuation(s, punc_chars, punc_repl):
   to_replace = set(punc_chars)
   return "".join(punc_repl if ch in to_replace else ch for ch in s)
 
-def ul2_boolq_accuracy(targets, predictions):
-  out_targets = []
-  out_predictions = []
-  for i in range(len(targets)):
-    if predictions[i] != "none":
-      out_targets.append(targets[i])
-      out_predictions.append(predictions[i])
-  return accuracy(out_targets, out_predictions)
+# def ul2_boolq_accuracy(targets, predictions):
+#   out_targets = []
+#   out_predictions = []
+#   for i in range(len(targets)):
+#     if predictions[i] != "none":
+#       out_targets.append(targets[i])
+#       out_predictions.append(predictions[i])
+#   return accuracy(out_targets, out_predictions)
+
+def ul2_boolq_accuracy(targets, scores):
+  print("targets:", targets)
+  print("scores:", scores)
+  return accuracy(targets, scores)
+
 
 def sequence_accuracy(targets, predictions):
   """Computes per-sequence accuracy.
