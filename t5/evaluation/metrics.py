@@ -267,9 +267,12 @@ def replace_punctuation(s, punc_chars, punc_repl):
 #       out_predictions.append(predictions[i])
 #   return accuracy(out_targets, out_predictions)
 
-def ul2_boolq_accuracy(targets, scores):
+def ul2_boolq_accuracy(targets, predictions, aux_values):
   print("targets:", targets)
-  print("scores:", scores)
+  print("predictions:", predictions)
+  print("aux_values:", aux_values)
+  
+  
   return accuracy(targets, scores)
 
 
