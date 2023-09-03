@@ -1308,7 +1308,7 @@ TaskRegistry.add(
 
 
 TaskRegistry.add(
-    "ul2_arc_c",
+    "ul2_arc",
     source=seqio.TfdsDataSource(tfds_name="ai2_arc/ARC-Challenge:1.0.0",
                                 splits={
                                     'validation': f'test[:32]',
