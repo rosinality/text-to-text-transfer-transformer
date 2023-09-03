@@ -2104,13 +2104,6 @@ def _filter_arc(dataset):
     return tf.equal(tf.shape(example['options'])[0], 4)
   return dataset.filter(my_fn)
 
-    separator = ""
-    char_options = tf.constant(
-        [f"\n({chr(x)}) " for x in range(ord("A"),
-                                         ord("Z") + 1)])
-    options = tf.reshape(
-        tf.stack([char_options[:len(example["options"])], example["options"]],
-                 axis=1), [-1])
 
 @seqio.map_over_dataset
 def format_options_arc(example):
@@ -2118,7 +2111,7 @@ def format_options_arc(example):
   options_prefix = "Options:"
   separator = ""
   char_options = tf.constant(
-      [f"\n({chr(x)}) " for x in range(ord("A"),
+      [f"\n({chr(x)}): " for x in range(ord("A"),
                                        ord("Z") + 1)])
   options = tf.reshape(
       tf.stack([char_options[:len(example["options"])], example["options"]],
@@ -2133,7 +2126,7 @@ def format_options_arc(example):
 def ul2_arc(dataset):
   return rank_classification_formatter(
     dataset,
-    inputs_formats='[NLU] Question: {question}\n\n Options:{options} \n\nAnswer: <extra_id_0>',
+    inputs_formats='[NLU] Question: {question}\n\n{options}\n\nAnswer: <extra_id_0>',
     targets_formats=[
       '<extra_id_0> A',
       '<extra_id_0> B',
