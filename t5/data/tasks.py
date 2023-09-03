@@ -1323,7 +1323,7 @@ TaskRegistry.add(
         seqio.preprocessors.append_eos,
     ],
     postprocess_fn=postprocessors.rank_classification,
-    metric_fns=[metrics.arc_accuracy],
+    metric_fns=[metrics.ul2_arc_accuracy],
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
