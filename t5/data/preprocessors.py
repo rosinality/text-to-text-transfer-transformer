@@ -189,6 +189,15 @@ def format_options(example):
   ])
   return example
 
+@seqio.map_over_dataset
+def _process_boolq_v2(example):
+  return {
+      'title': example['title'],
+      'text': example['passage'],
+      'question': example['question'],
+      'options': options,
+      'label': tf.cast(example['answer'], tf.int32),
+  }
 
 def trivia_qa(dataset):
   """Convert a TriviaQA example to multiple flattened examples.
@@ -2075,8 +2084,8 @@ def ul2_boolq(dataset):
     dataset,
     inputs_formats='[NLU] {passage} Question: {question}? Answer: <extra_id_0>',
     targets_formats=[
+      'no',
       'yes',
-      'no'
     ],
   )
 
