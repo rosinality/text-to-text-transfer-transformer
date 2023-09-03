@@ -2117,7 +2117,7 @@ def format_options_arc(example):
       tf.stack([char_options[:len(example["options"])], example["options"]],
                axis=1), [-1])
 
-  example["options_"] = tf.strings.reduce_join(
+  example["options"] = tf.strings.reduce_join(
       [options_prefix,
        tf.strings.reduce_join(options, separator=separator)],
   )
