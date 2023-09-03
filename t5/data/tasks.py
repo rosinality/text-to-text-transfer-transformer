@@ -1291,8 +1291,6 @@ TaskRegistry.add(
                                     'validation': f'validation',
                                 }),
     preprocessors=[
-        # preprocessors._process_boolq,
-        # preprocessors.format_options,
         preprocessors._process_boolq_v2,
         preprocessors.format_options,
         preprocessors.ul2_boolq,
@@ -1306,6 +1304,28 @@ TaskRegistry.add(
 )
 
 
+# ==================================ARC==================================
+
+
+TaskRegistry.add(
+    "ul2_arc_c",
+    source=seqio.TfdsDataSource(tfds_name="ai2_arc/ARC-Challenge:1.0.0",
+                                splits={
+                                    'validation': f'test[:32]',
+                                }),
+    preprocessors=[
+        preprocessors._process_arc,
+        preprocessors._filter_arc,
+        preprocessors.format_options_arc,
+        preprocessors.ul2_arc,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    postprocess_fn=postprocessors.rank_classification,
+    metric_fns=[metrics.arc_accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
 
 
 # =============== PrefixLM objectives (not used in the T5 paper) ===============
