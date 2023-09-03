@@ -191,6 +191,7 @@ def format_options(example):
 
 @seqio.map_over_dataset
 def _process_boolq_v2(example):
+  options = tf.constant(['no', 'yes'])
   return {
       'title': example['title'],
       'text': example['passage'],
