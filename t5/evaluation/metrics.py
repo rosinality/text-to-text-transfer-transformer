@@ -248,6 +248,9 @@ def accuracy(targets, predictions):
 
 def mmlu_accuracy(targets, predictions):
   predictions = [p[:1] for p in predictions]
+  for p in predictions:
+    if p not in ["A", "B", "C", "D"]:
+      print(f"Unrecognized Output: {p}")
   return accuracy(targets, predictions)
 
 def ul2_accuracy(targets, predictions):
