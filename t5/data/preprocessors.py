@@ -2090,6 +2090,59 @@ def ul2_boolq(dataset):
     ],
   )
 
+@seqio.map_over_dataset
+def _process_arc(example):
+  return {
+      'question': example['question'],
+      'options': example['choices']['text'],
+      'answer': example['choices']['text'][example['answerKey']],
+      'label': int(example['answerKey']),
+  }
+  
+def _filter_arc(dataset):
+  def my_fn(example):
+    return tf.equal(tf.shape(example['options'])[0], 4)
+  return dataset.filter(my_fn)
+
+    separator = ""
+    char_options = tf.constant(
+        [f"\n({chr(x)}) " for x in range(ord("A"),
+                                         ord("Z") + 1)])
+    options = tf.reshape(
+        tf.stack([char_options[:len(example["options"])], example["options"]],
+                 axis=1), [-1])
+
+@seqio.map_over_dataset
+def format_options_arc(example):
+  """Formats options for FLAN tasks."""
+  options_prefix = "Options:"
+  separator = ""
+  char_options = tf.constant(
+      [f"\n({chr(x)}) " for x in range(ord("A"),
+                                       ord("Z") + 1)])
+  options = tf.reshape(
+      tf.stack([char_options[:len(example["options"])], example["options"]],
+               axis=1), [-1])
+
+  example["options_"] = tf.strings.reduce_join(
+      [options_prefix,
+       tf.strings.reduce_join(options, separator=separator)],
+  )
+  return example
+  
+def ul2_arc(dataset):
+  return rank_classification_formatter(
+    dataset,
+    inputs_formats='[NLU] Question: {question}\n\n Options:{options} \n\nAnswer: <extra_id_0>',
+    targets_formats=[
+      '<extra_id_0> A',
+      '<extra_id_0> B',
+      '<extra_id_0> C',
+      '<extra_id_0> D',
+    ],
+  )
+
+
 
 @seqio.map_over_dataset
 def parse_tsv(line, field_names=None, field_delim='\t', field_columns=None):
