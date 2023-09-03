@@ -470,37 +470,37 @@ def ul2_humaneval(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
-def ul2_boolq(dataset):
+# def ul2_boolq(dataset):
 
-  def my_fn(example):
-    """Create lambada example."""
-    # return {
-    #     'inputs': tf.strings.join(
-    #       ["[NLU] , 
-    #        example["text"], 
-    #        "\n\n\nQuestion: ", 
-    #        example["question"], 
-    #        "?\n\n", 
-    #        example["options_"], 
-    #        "\n\nAnswer: <extra_id_0>" 
-    #       ],
-    #       separator=''),
-    #     "targets": example["answer"],
-    # }
-    return {
-        'inputs': tf.strings.join(
-          ["[NLU] ", 
-           example["text"], 
-           "Question: ", 
-           example["question"], 
-           "? yes or no?", 
-           " Answer: <extra_id_0>" 
-          ],
-          separator=''),
-        "targets": example["answer"],
-    }
-  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
-  return dataset
+#   def my_fn(example):
+#     """Create lambada example."""
+#     # return {
+#     #     'inputs': tf.strings.join(
+#     #       ["[NLU] , 
+#     #        example["text"], 
+#     #        "\n\n\nQuestion: ", 
+#     #        example["question"], 
+#     #        "?\n\n", 
+#     #        example["options_"], 
+#     #        "\n\nAnswer: <extra_id_0>" 
+#     #       ],
+#     #       separator=''),
+#     #     "targets": example["answer"],
+#     # }
+#     return {
+#         'inputs': tf.strings.join(
+#           ["[NLU] ", 
+#            example["text"], 
+#            "Question: ", 
+#            example["question"], 
+#            "? yes or no?", 
+#            " Answer: <extra_id_0>" 
+#           ],
+#           separator=''),
+#         "targets": example["answer"],
+#     }
+#   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+#   return dataset
 
 
 @seqio.map_over_dataset
@@ -2069,6 +2069,16 @@ def rank_classification_formatter(
       is_correct_fn=_is_correct_fn,
       weight_fn=None if weight_key is None else _weight_fn,
       mode=mode)
+
+def ul2_boolq(dataset):
+  return rank_classification_formatter(
+    dataset,
+    inputs_format='[NLU] {passage} Question: {question}? Answer: <extra_id_0>',
+    targets_formats=[
+      'yes',
+      'no'
+    ],
+  )
 
 
 @seqio.map_over_dataset
