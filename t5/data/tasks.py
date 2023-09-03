@@ -1293,6 +1293,7 @@ TaskRegistry.add(
     preprocessors=[
         # preprocessors._process_boolq,
         # preprocessors.format_options,
+        preprocessors._process_boolq_v2,
         preprocessors.ul2_boolq,
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
