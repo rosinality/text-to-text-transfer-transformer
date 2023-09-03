@@ -273,6 +273,9 @@ def replace_punctuation(s, punc_chars, punc_repl):
 def ul2_boolq_accuracy(targets, scores):
   return rank_classification(targets, scores, num_classes=2, normalize_by_target_length=True)
 
+def ul2_arc_accuracy(targets, scores):
+  return rank_classification(targets, scores, num_classes=4, normalize_by_target_length=True)
+
 
 def sequence_accuracy(targets, predictions):
   """Computes per-sequence accuracy.
