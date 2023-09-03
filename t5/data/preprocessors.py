@@ -2073,7 +2073,7 @@ def rank_classification_formatter(
 def ul2_boolq(dataset):
   return rank_classification_formatter(
     dataset,
-    inputs_format='[NLU] {passage} Question: {question}? Answer: <extra_id_0>',
+    inputs_formats='[NLU] {passage} Question: {question}? Answer: <extra_id_0>',
     targets_formats=[
       'yes',
       'no'
