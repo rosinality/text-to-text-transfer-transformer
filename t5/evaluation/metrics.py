@@ -269,7 +269,7 @@ def replace_punctuation(s, punc_chars, punc_repl):
 
 def ul2_boolq_accuracy(targets, scores):
   print("targets:", targets)
-  print("scores):", scores))
+  print("scores:", scores)
   return rank_classification(targets, scores, num_classes=2)
 
 
