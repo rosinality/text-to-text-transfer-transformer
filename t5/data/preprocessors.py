@@ -2085,8 +2085,8 @@ def ul2_boolq(dataset):
     dataset,
     inputs_formats='[NLU] {text} Question: {question}? Answer: <extra_id_0>',
     targets_formats=[
-      'no',
-      'yes',
+      '<extra_id_0> no',
+      '<extra_id_0> yes',
     ],
   )
 
