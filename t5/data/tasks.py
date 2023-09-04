@@ -606,7 +606,7 @@ TaskRegistry.add(
 
 
 TaskRegistry.add(
-    "wikipedia_ul2",
+    "wikipedia_full_lm",
     source=seqio.TfdsDataSource(
         tfds_name="wikipedia/20190301.en:1.0.0",
         splits={
