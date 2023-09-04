@@ -1395,3 +1395,32 @@ seqio.TaskRegistry.add(
     },
     metric_fns=[])
 
+
+# UL2
+TaskRegistry.add(
+    "c4_v220_ul2_pack",
+    source=seqio.TfdsDataSource(
+        tfds_name="c4/en:3.0.1",
+    ),
+    preprocessors=[
+        functools.partial(
+            preprocessors.rekey, key_map={
+                "inputs": None,
+                "targets": "text"
+            }),
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.ul2_objective,
+        seqio.preprocessors.append_eos_after_trim,
+        preprocessors.pack_prefix_lm_decoder_only,
+    ],
+    output_features={
+        "decoder_target_tokens": seqio.Feature(vocabulary=vocab, add_eos=False),
+        "decoder_input_tokens": seqio.Feature(vocabulary=vocab, add_eos=False),
+        "decoder_loss_weights": seqio.Feature(vocabulary=vocab, add_eos=False),
+        "decoder_causal_attention": seqio.Feature(
+            vocabulary=vocab, add_eos=False),
+        "targets": seqio.Feature(vocabulary=vocab, required=False),
+    },
+    metric_fns=[])
+
