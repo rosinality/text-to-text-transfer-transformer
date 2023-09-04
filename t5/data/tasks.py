@@ -1415,12 +1415,12 @@ TaskRegistry.add(
         preprocessors.pack_prefix_lm_decoder_only,
     ],
     output_features={
-        "decoder_target_tokens": seqio.Feature(vocabulary=vocab, add_eos=False),
-        "decoder_input_tokens": seqio.Feature(vocabulary=vocab, add_eos=False),
-        "decoder_loss_weights": seqio.Feature(vocabulary=vocab, add_eos=False),
+        "decoder_target_tokens": seqio.Feature(vocabulary=t5.data.get_default_vocabulary(), add_eos=False),
+        "decoder_input_tokens": seqio.Feature(vocabulary=t5.data.get_default_vocabulary(), add_eos=False),
+        "decoder_loss_weights": seqio.Feature(vocabulary=t5.data.get_default_vocabulary(), add_eos=False),
         "decoder_causal_attention": seqio.Feature(
-            vocabulary=vocab, add_eos=False),
-        "targets": seqio.Feature(vocabulary=vocab, required=False),
+            vocabulary=t5.data.get_default_vocabulary(), add_eos=False),
+        "targets": seqio.Feature(vocabulary=t5.data.get_default_vocabulary(), required=False),
     },
     metric_fns=[])
 
