@@ -2083,10 +2083,10 @@ def rank_classification_formatter(
 def boolq(dataset):
   return rank_classification_formatter(
     dataset,
-    inputs_formats='{text}\n\nQuestion: {question}?\n\n{options_}\n\nAnswer: ',
+    inputs_formats='{text}\n\nQuestion: {question}?\n\n{options_}\n\nAnswer:',
     targets_formats=[
-      'no',
-      'yes',
+      ' no',
+      ' yes',
     ],
   )
 
