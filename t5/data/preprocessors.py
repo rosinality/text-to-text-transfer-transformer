@@ -2080,6 +2080,16 @@ def rank_classification_formatter(
       weight_fn=None if weight_key is None else _weight_fn,
       mode=mode)
 
+def boolq(dataset):
+  return rank_classification_formatter(
+    dataset,
+    inputs_formats='{text} Question: {question}? Answer: ',
+    targets_formats=[
+      'no',
+      'yes',
+    ],
+  )
+
 def ul2_boolq(dataset):
   return rank_classification_formatter(
     dataset,
