@@ -136,6 +136,22 @@ MixtureRegistry.add(
 )
 
 MixtureRegistry.add(
+    "mix_full_lm_stage2",
+    [
+        ("redpajama_c4_full_lm", 15.),
+        ("redpajama_wikipedia_full_lm", 6.5),
+        ("wikipedia_full_lm", 6.5),
+        ("redpajama_stackexchange_full_lm", 2.5),
+        ("redpajama_arxiv_full_lm", 4.5),
+        ("redpajama_book_full_lm", 6.5),
+        ("redpajama_github_full_lm", 5.0),
+        ("redpajama_common_crawl_full_lm", 43.5),
+        ("the_stack_dedup_full_lm", 10.0),
+    ],
+    default_rate=1.,
+)
+
+MixtureRegistry.add(
     "mix_ul2_noprefix",
     [
         ("redpajama_c4_ul2", 15.),
@@ -192,6 +208,22 @@ MixtureRegistry.add(
         ("redpajama_github_full_lm", 4.5),
         ("redpajama_common_crawl_full_lm", 67.0),
         ("the_stack_dedup_full_lm", 100.),
+    ],
+    default_rate=1.,
+)
+
+MixtureRegistry.add(
+    "mix_full_lm_v2",
+    [
+        ("redpajama_c4_full_lm", 15.),
+        ("redpajama_wikipedia_full_lm", 4.5),
+        ("wikipedia_full_lm", 2.5),
+        ("redpajama_stackexchange_full_lm", 1.),
+        ("redpajama_arxiv_full_lm", 4.5),
+        ("redpajama_book_full_lm", 4.5),
+        ("redpajama_github_full_lm", 5),
+        ("redpajama_common_crawl_full_lm", 33.),
+        ("the_stack_dedup_full_lm", 30.),
     ],
     default_rate=1.,
 )
