@@ -39,6 +39,14 @@ DEFAULT_OUTPUT_FEATURES = {
         vocabulary=t5.data.get_default_vocabulary(), add_eos=True)
 }
 
+DEFAULT_OUTPUT_FEATURES_V2 = {
+    "inputs": seqio.Feature(
+        vocabulary=t5.data.get_default_vocabulary(), add_eos=False,
+        required=False),
+    "targets": seqio.Feature(
+        vocabulary=t5.data.get_default_vocabulary(), add_eos=True)
+}
+
 # ==================================== C4 ======================================
 # Final pretraining task used in Raffel et al., 2019.
 TaskRegistry.add(
@@ -1329,7 +1337,7 @@ TaskRegistry.add(
     ],
     postprocess_fn=postprocessors.rank_classification,
     metric_fns=[metrics.ul2_boolq_accuracy],
-    output_features=DEFAULT_OUTPUT_FEATURES,
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
 
 
