@@ -167,7 +167,7 @@ MixtureRegistry.add(
 MixtureRegistry.add(
     "mix_ul2_v2",
     [
-        ("redpajama_c4_ul2", 10.),
+        ("redpajama_c4_ul2", 15.),
         ("redpajama_wikipedia_ul2", 4.5),
         ("wikipedia_ul2", 2.5),
         ("redpajama_stackexchange_ul2", 1.),
@@ -175,7 +175,7 @@ MixtureRegistry.add(
         ("redpajama_book_ul2", 4.5),
         ("redpajama_github_ul2", 5),
         ("redpajama_common_crawl_ul2", 33.),
-        ("the_stack_dedup_ul2", 35.),
+        ("the_stack_dedup_ul2", 30.),
     ],
     default_rate=1.,
 )
