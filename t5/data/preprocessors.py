@@ -2132,7 +2132,21 @@ def format_options_arc(example):
        tf.strings.reduce_join(options, separator=separator)],
   )
   return example
-  
+
+
+def arc(dataset):
+  return rank_classification_formatter(
+    dataset,
+    inputs_formats='[NLU] Question: {question}\n\n{options}\n\nAnswer:',
+    targets_formats=[
+      ' A',
+      ' B',
+      ' C',
+      ' D',
+    ],
+  )
+
+
 def ul2_arc(dataset):
   return rank_classification_formatter(
     dataset,
