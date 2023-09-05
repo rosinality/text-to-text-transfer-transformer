@@ -1366,6 +1366,27 @@ TaskRegistry.add(
 
 
 TaskRegistry.add(
+    "arc",
+    source=seqio.TfdsDataSource(
+                                tfds_name="ai2_arc/ARC-Easy:1.0.0", # tfds_name="ai2_arc/ARC-Challenge:1.0.0",
+                                splits={
+                                    'validation': f'test[:128]',
+                                }),
+    preprocessors=[
+        preprocessors._process_arc,
+        preprocessors._filter_arc,
+        preprocessors.format_options_arc,
+        preprocessors.arc,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    postprocess_fn=postprocessors.rank_classification,
+    metric_fns=[metrics.ul2_arc_accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
+
+TaskRegistry.add(
     "ul2_arc",
     source=seqio.TfdsDataSource(
                                 tfds_name="ai2_arc/ARC-Easy:1.0.0", # tfds_name="ai2_arc/ARC-Challenge:1.0.0",
