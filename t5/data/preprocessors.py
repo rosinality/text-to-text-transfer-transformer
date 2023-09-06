@@ -489,9 +489,11 @@ def boolq(dataset):
         'inputs': tf.strings.join(
           [
             example["text"], 
-           "\n\nAnswer the following question by yes or no: ", 
+           "\n\nIs it true that ", 
            example["question"], 
-           "?\n\nAnswer: " 
+           "?\n\n",
+           example["options_"], 
+           "\n\nAnswer:" ,
           ],
           separator=''),
         "targets": example["answer"],
