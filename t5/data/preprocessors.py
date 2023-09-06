@@ -491,7 +491,7 @@ def boolq(dataset):
             example["text"], 
            "\n\nAnswer the following question by yes or no: ", 
            example["question"], 
-           "\n\nAnswer: " 
+           "?\n\nAnswer: " 
           ],
           separator=''),
         "targets": example["answer"],
