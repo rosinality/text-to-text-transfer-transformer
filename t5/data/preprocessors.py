@@ -316,7 +316,8 @@ def trivia_qa_nocontext(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': tf.strings.join(["Question: ", x['question'], "\nAnswer:" ], separator=''),
+        'inputs': tf.strings.join([
+          "Answer the following trivia question:\nQuestion: Which American-born Sinclair won the Nobel Prize for Literature in 1930? Answer: sinclair lewis\nQuestion: ", x['question'], " Answer:" ], separator=''),
         "targets": x["answer"]["value"],
         "answers": x["answer"]["aliases"],
     }
