@@ -1178,7 +1178,7 @@ TaskRegistry.add(
         seqio.CacheDatasetPlaceholder(),
         # seqio.preprocessors.append_eos,
     ],
-    postprocess_fn=postprocessors.qa,
+    postprocess_fn=postprocessors.trivia_qa,
     metric_fns=[metrics.ul2_trivia_qa],
     output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
