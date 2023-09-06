@@ -2137,7 +2137,7 @@ def format_options_arc(example):
 def arc(dataset):
   return rank_classification_formatter(
     dataset,
-    inputs_formats='[NLU] Question: {question}\n\n{options}\n\nAnswer:',
+    inputs_formats='Question: {question}\n\n{options}\n\nAnswer:',
     targets_formats=[
       ' A',
       ' B',
