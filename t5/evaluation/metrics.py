@@ -239,7 +239,7 @@ def ul2_trivia_qa(targets, predictions):
   """
   targets = [[qa_utils.normalize_trivia_qa(t) for t in u] for u in targets]
   predictions = [
-    qa_utils.normalize_trivia_qa(p.split("<extra_id_0> ")[-1].split(".")[0].split(",")[0].split("\b")[0].split("\n")[0]) for p in predictions]
+    qa_utils.normalize_trivia_qa(p) for p in predictions]
   return qa_utils.qa_metrics(targets, predictions)
 
 
