@@ -529,8 +529,8 @@ def ul2_boolq(dataset):
     #        " Answer: <extra_id_0>" 
     #       ],
     #       separator=''),
-        "targets": example["answer"],
-    }
+    #     "targets": example["answer"],
+    # }
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
