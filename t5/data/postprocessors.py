@@ -84,7 +84,7 @@ def trivia_qa(answer, example=None, is_target=False):
   """Returns answer, or all answers if the full example is provided."""
   if is_target:
     return [tf.compat.as_text(a) for a in example["answers"]]
-  return answer.split(".")[0].split(",")[0].split("\b")[0].split("\n")[0]
+  return answer.split(".")[0].split(",")[0].split("\b")[0].split("\n")[0].strip()
 
 
 def span_qa(answer, example=None, is_target=False):
