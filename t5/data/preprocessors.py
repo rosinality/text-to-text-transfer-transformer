@@ -508,7 +508,7 @@ def ul2_boolq(dataset):
     return {
         'inputs': tf.strings.join(
           [
-            "[NLU], 
+            "[NLU] ", 
             example["text"], 
             "\n\nQuestion: ", 
             example["question"], 
@@ -519,18 +519,7 @@ def ul2_boolq(dataset):
           separator=''),
         "targets": example["answer"],
     }
-    # return {
-    #     'inputs': tf.strings.join(
-    #       ["[NLU] ", 
-    #        example["text"], 
-    #        "Question: ", 
-    #        example["question"], 
-    #        "? yes or no?", 
-    #        " Answer: <extra_id_0>" 
-    #       ],
-    #       separator=''),
-    #     "targets": example["answer"],
-    # }
+
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
