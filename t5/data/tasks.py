@@ -1166,26 +1166,26 @@ def tqa_open_postprocessor(output_or_target, example=None, is_target=False):
     return output_or_target
 
 TaskRegistry.add(
-    "trivia_qa_wo_ul2_v010_nocontext",
+    "trivia_qa_v010_nocontext",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
-                                    'validation': f'validation',
+                                    'validation': f'validation[:128]',
                                 }),
     preprocessors=[
         _filter_trivia_qa,
         preprocessors.trivia_qa_nocontext,
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
-        seqio.preprocessors.append_eos,
+        # seqio.preprocessors.append_eos,
     ],
     postprocess_fn=postprocessors.qa,
-    metric_fns=[metrics.trivia_qa],
-    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.ul2_trivia_qa],
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
 
 
 TaskRegistry.add(
-    "trivia_qa_v010_nocontext",
+    "ul2_trivia_qa_v010_nocontext",
     source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
                                 splits={
                                     'validation': f'validation',
@@ -1383,7 +1383,7 @@ TaskRegistry.add(
     ],
     postprocess_fn=postprocessors.rank_classification,
     metric_fns=[metrics.ul2_arc_accuracy],
-    output_features=DEFAULT_OUTPUT_FEATURES,
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
 
 TaskRegistry.add(
