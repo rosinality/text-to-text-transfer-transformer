@@ -211,8 +211,7 @@ def ul2_boolq(answer,
   del example
   if is_target:
     return answer
-  answer
-  answer = answer.split("<extra_id_0>")[-1].replace(".", "").replace("\n", "").lower().strip()
+  answer = answer.replace(".", "").replace("\n", "").lower().strip()
   if answer.startswith("yes"):
     answer = "yes"
   elif answer.startswith("no"):
