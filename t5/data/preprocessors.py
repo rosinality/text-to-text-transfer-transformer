@@ -466,6 +466,21 @@ def ul2_lambada(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def humaneval(dataset):
+
+  def my_fn(example):
+    """Create lambada example."""
+    prompt = "Complete the following Python code without any tests or explanation\n"
+    return {
+        'inputs': tf.strings.join([prompt, example["prompt"] ], separator=''),
+        "targets": example["canonical_solution"],
+        "task_id": example["task_id"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
+
 def ul2_humaneval(dataset):
 
   def my_fn(example):
