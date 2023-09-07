@@ -1309,6 +1309,26 @@ TaskRegistry.add(
 
 # ==================================HumanEval==================================
 
+
+
+TaskRegistry.add(
+    "humaneval",
+    source=seqio.TfdsDataSource(tfds_name="human_eval:1.0.0",
+                                splits={
+                                    'validation': f'train',
+                                }),
+    preprocessors=[
+        preprocessors.humaneval,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    postprocess_fn=postprocessors.ul2_humaneval,
+    metric_fns=[metrics.accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
+)
+
+
 TaskRegistry.add(
     "ul2_humaneval",
     source=seqio.TfdsDataSource(tfds_name="human_eval:1.0.0",
