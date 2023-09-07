@@ -1251,6 +1251,21 @@ TaskRegistry.add(
 
 # ==================================MMLU==================================
 
+TaskRegistry.add(
+    "mmlu",
+    source=seqio.TfdsDataSource(tfds_name="mmlu:1.0.0",
+                                splits={
+                                    'validation': f'train[:128]',
+                                }),
+    preprocessors=[
+        preprocessors.mmlu,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    metric_fns=[metrics.mmlu_accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
+)
 
 TaskRegistry.add(
     "ul2_mmlu",
