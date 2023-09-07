@@ -247,7 +247,7 @@ def accuracy(targets, predictions):
   return {"accuracy": 100*sklearn.metrics.accuracy_score(targets, predictions)}
 
 def mmlu_accuracy(targets, predictions):
-  predictions = [p[:1] for p in predictions]
+  predictions = [p.strip()[:1] for p in predictions]
   for p in predictions:
     if p not in ["A", "B", "C", "D"]:
       print(f"Unrecognized Output: {p}")
