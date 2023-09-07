@@ -1275,7 +1275,7 @@ TaskRegistry.add(
     "lambada",
     source=seqio.TfdsDataSource(tfds_name="lambada:1.0.0",
                                 splits={
-                                    'validation': f'test[:32]',
+                                    'validation': f'test[:128]',
                                 }),
     preprocessors=[
         preprocessors.lambada,
@@ -1285,7 +1285,7 @@ TaskRegistry.add(
     ],
     postprocess_fn=postprocessors.take_first_word,
     metric_fns=[metrics.accuracy],
-    output_features=DEFAULT_OUTPUT_FEATURES,
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
 
 TaskRegistry.add(
