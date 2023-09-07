@@ -481,25 +481,25 @@ def ul2_humaneval(dataset):
   return dataset
 
 
-def boolq(dataset):
+# def boolq(dataset):
 
-  def my_fn(example):
-    """Create lambada example."""
-    return {
-        'inputs': tf.strings.join(
-          [
-            example["text"], 
-           "\n\nIs it true that ", 
-           example["question"], 
-           "?\n\n",
-           example["options_"], 
-           "\n\nAnswer:" ,
-          ],
-          separator=''),
-        "targets": example["answer"],
-    }
-  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
-  return dataset
+#   def my_fn(example):
+#     """Create lambada example."""
+#     return {
+#         'inputs': tf.strings.join(
+#           [
+#             example["text"], 
+#            "\n\nIs it true that ", 
+#            example["question"], 
+#            "?\n\n",
+#            example["options_"], 
+#            "\n\nAnswer:" ,
+#           ],
+#           separator=''),
+#         "targets": example["answer"],
+#     }
+#   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+#   return dataset
 
 def ul2_boolq(dataset):
 
@@ -2091,15 +2091,15 @@ def rank_classification_formatter(
       weight_fn=None if weight_key is None else _weight_fn,
       mode=mode)
 
-# def boolq(dataset):
-#   return rank_classification_formatter(
-#     dataset,
-#     inputs_formats='{text}\n\nQuestion: {question}? Tell me yes or no? \n\nAnswer:',
-#     targets_formats=[
-#       ' no',
-#       ' yes',
-#     ],
-#   )
+def boolq(dataset):
+  return rank_classification_formatter(
+    dataset,
+    inputs_formats='{text}\n\nQuestion: {question}? Tell me yes or no? \n\nAnswer:',
+    targets_formats=[
+      ' no',
+      ' yes',
+    ],
+  )
 
 # def ul2_boolq(dataset):
 #   return rank_classification_formatter(
