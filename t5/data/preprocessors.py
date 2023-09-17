@@ -495,6 +495,18 @@ def ul2_humaneval(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def orca_sft(dataset):
+
+  def my_fn(x):
+    """Create Orca example."""
+    return {
+        'inputs': None,
+        "targets": tf.strings.join([x["system_prompt"], "\n\nUSER:\n", example["question"], "\n\nASSISTANT:\n", example["response"]], separator=''),
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
 
 # def boolq(dataset):
 
