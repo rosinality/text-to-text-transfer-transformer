@@ -1217,6 +1217,23 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
 
+TaskRegistry.add(
+    "sft_trivia_qa_v010_nocontext",
+    source=seqio.TfdsDataSource(tfds_name="trivia_qa/unfiltered.nocontext:1.1.0",
+                                splits={
+                                    'validation': f'validation[:128]',
+                                }),
+    preprocessors=[
+        _filter_trivia_qa,
+        preprocessors.sft_trivia_qa_nocontext,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        # seqio.preprocessors.append_eos,
+    ],
+    postprocess_fn=postprocessors.trivia_qa,
+    metric_fns=[metrics.ul2_trivia_qa],
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
+)
 
 TaskRegistry.add(
     "ul2_trivia_qa_v010_nocontext",
@@ -1321,7 +1338,7 @@ TaskRegistry.add(
         seqio.preprocessors.append_eos,
     ],
     metric_fns=[metrics.mmlu_accuracy],
-    output_features=DEFAULT_OUTPUT_FEATURES,
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
 )
 
 
