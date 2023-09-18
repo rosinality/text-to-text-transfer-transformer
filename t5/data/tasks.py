@@ -881,7 +881,7 @@ TaskRegistry.add(
         seqio.preprocessors.append_eos_after_trim,
 
     ],
-    output_features=DEFAULT_OUTPUT_FEATURES,
+    output_features=DEFAULT_OUTPUT_FEATURES_V2,
     metric_fns=[])
 
 # Configurable tasks used for comparisons in Raffel et al., 2019.
