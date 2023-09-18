@@ -466,8 +466,9 @@ def ul2_mmlu(dataset):
 def sft_mmlu(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
+    
     return {
-        'inputs': tf.strings.join(["USER: ",  tf.strings.split(x['prompt'], sep="\n\n")[0], tf.strings.split(x['prompt'], sep="\n\n")[-1], "ASSISTANT: "], separator=''),
+        'inputs': tf.strings.join(["USER: Answer the following question:\n", tf.strings.split(tf.strings.split(x['prompt'], sep="\n\n")[-1], sep="\nAnswer")[0], "\nASSISTANT: "], separator=''),
         "targets": x["answer"],
     }
 
