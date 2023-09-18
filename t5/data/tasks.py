@@ -1308,6 +1308,22 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
 )
 
+TaskRegistry.add(
+    "sft_mmlu",
+    source=seqio.TfdsDataSource(tfds_name="mmlu:1.0.0",
+                                splits={
+                                    'validation': f'train[:128]',
+                                }),
+    preprocessors=[
+        preprocessors.sft_mmlu,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos,
+    ],
+    metric_fns=[metrics.mmlu_accuracy],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+)
+
 
 # ==================================LAMBADA==================================
 
