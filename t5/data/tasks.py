@@ -858,6 +858,26 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[])
 
+# The Stack dataset UL2
+TaskRegistry.add(
+    "orca_sft",
+    source=seqio.TfdsDataSource(
+        tfds_name="orca:1.0.0",
+        splits={
+            'train': 'train',
+            'validation': f'train[-{NUM_VAL_EXAMPLES}:]',
+        },
+    ),
+    preprocessors=[
+        preprocessors.orca_sft,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        preprocessors.full_lm,
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[])
 
 # Configurable tasks used for comparisons in Raffel et al., 2019.
 _c4_config_suffixes = ["", ".noclean", ".realnewslike", ".webtextlike"]
