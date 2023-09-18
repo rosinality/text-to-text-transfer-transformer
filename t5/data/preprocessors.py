@@ -436,7 +436,7 @@ def sft_mmlu(dataset):
   def my_fn(x):
     """Create TriviaQA example."""
     return {
-        'inputs': tf.strings.join(["USER: ", x['question'], "ASSISTANT: "], separator=''),
+        'inputs': tf.strings.join(["USER: ", x['prompt'], "ASSISTANT: "], separator=''),
         "targets": x["answer"],
     }
 
