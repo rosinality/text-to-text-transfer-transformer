@@ -468,10 +468,12 @@ def sft_mmlu(dataset):
     """Create TriviaQA example."""
     zero_shot_question = tf.strings.split(tf.strings.split(x['prompt'], sep="\n\n")[-1], sep="\nAnswer")[0]
     question = tf.strings.split(zero_shot_question, sep="\n")[0]
-    answers = tf.strings.split(zero_shot_question, sep="\n")[1:]
-    answers = tf.strings.join(answers, separator='\n')
+
+    answers = tf.strings.substr(
+      zero_shot_question, 0,
+      tf.strings.length(question))
     return {
-        'inputs': tf.strings.join(["USER: Answer the following question:\n", question, "\nChoose your answer from:\n", answers, "\nASSISTANT: "], separator=''),
+        'inputs': tf.strings.join(["USER: Answer the following question:\n", question, "\nChoose your answer from:", answers, "\nASSISTANT: "], separator=''),
         "targets": x["answer"],
     }
 
