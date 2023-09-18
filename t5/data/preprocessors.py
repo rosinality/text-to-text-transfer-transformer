@@ -325,6 +325,36 @@ def trivia_qa_nocontext(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def sft_trivia_qa_nocontext(dataset):
+  """Convert a TriviaQA example to multiple flattened examples.
+
+  TriviaQA produces examples with this form:
+    {'entity_pages': {dict of wiki entities},
+     'search_results': <dict of web search results>,
+     'answer': {dict of all answers}, 'question': <question>,
+     'question_id': <question_id>, 'question_source': <question_source>}
+  This function will return flattend examples of the format:
+    {'inputs': 'Q: <question>\nA:'
+     'targets': 'answer: <sampled answer>'}
+
+  Args:
+    dataset: a tf.data.Dataset to process.
+  Returns:
+    A preprocessed tf.data.Dataset with the format listed above.
+  """
+
+  def my_fn(x):
+    """Create TriviaQA example."""
+    return {
+        'inputs': tf.strings.join([
+          "USER: Answer the following trivia question:\nQuestion: ", x['question'], "Answer: ASSISTANT: " ], separator=''),
+        "targets": x["answer"]["value"],
+        "answers": x["answer"]["aliases"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
 
 def ul2_trivia_qa_nocontext(dataset):
   """Convert a TriviaQA example to multiple flattened examples.
