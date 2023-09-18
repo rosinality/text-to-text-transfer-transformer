@@ -470,8 +470,8 @@ def sft_mmlu(dataset):
     question = tf.strings.split(zero_shot_question, sep="\n")[0]
 
     answers = tf.strings.substr(
-      zero_shot_question, 0,
-      tf.strings.length(question))
+      zero_shot_question, tf.strings.length(question) + 1,
+      tf.strings.length(zero_shot_question) - tf.strings.length(question) - 1)
     return {
         'inputs': tf.strings.join(["USER: Answer the following question:\n", question, "\nChoose your answer from:", answers, "\nASSISTANT: "], separator=''),
         "targets": x["answer"],
