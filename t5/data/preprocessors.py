@@ -432,6 +432,17 @@ def ul2_mmlu(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def sft_mmlu(dataset):
+  def my_fn(x):
+    """Create TriviaQA example."""
+    return {
+        'inputs': tf.strings.join(["USER: ", x['question'], "ASSISTANT: "], separator=''),
+        "targets": x["answer"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
 def lambada(dataset):
 
   def my_fn(example):
