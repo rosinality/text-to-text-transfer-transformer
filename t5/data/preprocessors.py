@@ -548,7 +548,8 @@ def orca_sft(dataset):
   def my_fn(x):
     """Create Orca example."""
     return {
-        "text": tf.strings.join([x["system_prompt"], "USER: ", x["question"], "ASSISTANT: ", x["response"]], separator=''),
+        'inputs': tf.strings.join([x["system_prompt"], "USER: ", x["question"], "ASSISTANT: "], separator=''),
+        "targets": x["response"],
     }
 
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
