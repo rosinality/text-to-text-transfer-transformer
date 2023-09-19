@@ -870,14 +870,8 @@ TaskRegistry.add(
     ),
     preprocessors=[
         preprocessors.orca_sft,
-        functools.partial(
-            preprocessors.rekey, key_map={
-                "inputs": None,
-                "targets": "text"
-            }),
         seqio.preprocessors.tokenize,
         seqio.CacheDatasetPlaceholder(),
-        preprocessors.full_lm,
         seqio.preprocessors.append_eos_after_trim,
 
     ],
