@@ -233,12 +233,12 @@ def metric_group_max(df, metric_names=None):
   for group, metrics in group_to_metrics.items():
     if not all(m in df for m in metrics):
       continue
-    group_df[group] = df[metrics].mean(axis=1)
+    group_df[group] = df[list(metrics)].mean(axis=1)
   # Need to replace nan with large negative value for idxmax
   group_max_step = group_df.fillna(-1e9).idxmax(axis=0)
   metric_max = pd.Series()
   metric_max_step = pd.Series()
-  for group_name, max_step in group_max_step.iteritems():
+  for group_name, max_step in group_max_step.items():
     for metric in group_to_metrics[group_name]:
       metric_max[metric] = df[metric][max_step]
       metric_max_step[metric] = max_step
