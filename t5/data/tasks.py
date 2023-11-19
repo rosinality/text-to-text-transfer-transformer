@@ -913,7 +913,7 @@ TaskRegistry.add(
 
     ],
     output_features=DEFAULT_OUTPUT_FEATURES_V3,
-    etric_fns=[metrics.accuracy],
+    metric_fns=[metrics.accuracy],
 )
 
 
