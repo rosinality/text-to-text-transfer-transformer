@@ -897,6 +897,26 @@ TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES_V3,
     metric_fns=[])
 
+TaskRegistry.add(
+    "wildchat_gpt4_eval",
+    source=seqio.TfdsDataSource(
+        tfds_name="wildchat_gpt4_sft:1.0.0",
+        splits={
+            'validation': f'train[-256:]',
+        },
+    ),
+    preprocessors=[
+        preprocessors.wildchat_sft,
+        seqio.preprocessors.tokenize,
+        seqio.CacheDatasetPlaceholder(),
+        seqio.preprocessors.append_eos_after_trim,
+
+    ],
+    output_features=DEFAULT_OUTPUT_FEATURES_V3,
+    etric_fns=[metrics.accuracy],
+)
+
+
 # Configurable tasks used for comparisons in Raffel et al., 2019.
 _c4_config_suffixes = ["", ".noclean", ".realnewslike", ".webtextlike"]
 for config_suffix in _c4_config_suffixes:
