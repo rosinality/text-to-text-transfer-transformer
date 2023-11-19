@@ -883,7 +883,7 @@ TaskRegistry.add(
     source=seqio.TfdsDataSource(
         tfds_name="wildchat_gpt4_sft:1.0.0",
         splits={
-            'train': 'train[: -128]',
+            'train': 'train',
             'validation': f'train[-128:]',
         },
     ),
