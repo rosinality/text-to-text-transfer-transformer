@@ -555,6 +555,18 @@ def orca_sft(dataset):
   dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
   return dataset
 
+def wildchat_sft(dataset):
+
+  def my_fn(x):
+    """Create Orca example."""
+    return {
+        'inputs': x["input"],
+        "targets": x["output"],
+    }
+
+  dataset = dataset.map(my_fn, num_parallel_calls=AUTOTUNE)
+  return dataset
+
 
 # def boolq(dataset):
 
