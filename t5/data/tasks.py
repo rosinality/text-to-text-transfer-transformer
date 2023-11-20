@@ -1503,9 +1503,9 @@ TaskRegistry.add(
 TaskRegistry.add(
     "arc",
     source=seqio.TfdsDataSource(
-                                tfds_name="ai2_arc/ARC-Easy:1.0.0", # tfds_name="ai2_arc/ARC-Challenge:1.0.0",
+                                tfds_name="ai2_arc/ARC-Challenge:1.0.0", # tfds_name="ai2_arc/ARC-Easy:1.0.0", 
                                 splits={
-                                    'validation': f'test[:128]',
+                                    'validation': f'test',
                                 }),
     preprocessors=[
         preprocessors._process_arc,
