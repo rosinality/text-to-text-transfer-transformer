@@ -1330,7 +1330,7 @@ TaskRegistry.add(
     "mmlu",
     source=seqio.TfdsDataSource(tfds_name="mmlu:1.0.0",
                                 splits={
-                                    'validation': f'train',
+                                    'validation': f'train[:128]',
                                 }),
     preprocessors=[
         preprocessors.mmlu,
