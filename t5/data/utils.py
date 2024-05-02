@@ -19,7 +19,7 @@ import seqio
 
 # DEFAULT_SPM_PATH = "gs://t5-data/vocabs/cc_all.32000/sentencepiece.model"  # GCS
 # DEFAULT_EXTRA_IDS = 100
-DEFAULT_SPM_PATH = "gs://fuzhao/tokenizers/umt5.256000/sentencepiece.model"  # GCS
+DEFAULT_SPM_PATH = "gs://rosinality-tpu-bucket/sentencepiece.model"  # GCS
 DEFAULT_EXTRA_IDS = 300 # 300
 
 
