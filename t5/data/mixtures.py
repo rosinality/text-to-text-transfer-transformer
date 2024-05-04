@@ -213,6 +213,17 @@ MixtureRegistry.add(
 )
 
 MixtureRegistry.add(
+    "mix_full_lm_test",
+    [
+        ("redpajama_wikipedia_full_lm", 4.5),
+        ("redpajama_stackexchange_full_lm", 2.0),
+        ("redpajama_arxiv_full_lm", 2.5),
+        ("redpajama_github_full_lm", 4.5),
+     ],
+    default_rate=1.,
+)
+
+MixtureRegistry.add(
     "mix_full_lm_v2",
     [
         ("redpajama_c4_full_lm", 15.),
