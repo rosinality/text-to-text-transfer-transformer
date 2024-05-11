@@ -2889,7 +2889,7 @@ def ul2_objective(
         ds = ds_shards[-1]
         
         ds = ds_shards[offset]
-        ds = prefix_lm(ds, sequence_lengths, output_features, max_prefix_length=1)
+        ds = prefix_lm(ds, sequence_lengths, output_features, max_prefix_length=0)
         if optional_task_prefixes:
             ds = prepend_prompt(
                 ds,
@@ -3919,6 +3919,9 @@ def random_prefix_noise_mask(length, noise_density, seeds, max_prefix_length=Non
       
     else:
       max_input_tokens = max_prefix_length
+      
+    if max_prefix_length == 0:
+        return tf.range(length, dtype=tf.int32) < 0
     
       
     min_input_tokens = tf.minimum(
